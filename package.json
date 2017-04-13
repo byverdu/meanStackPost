@@ -1,0 +1,23 @@
+{
+  "name": "mean-stack-tutorial",
+  "version": "1.0.0",
+  "description": "imdb application to explain how mean stack works",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byverdu/meanStackPost.git"
+  },
+  "keywords": [
+    "mean",
+    "stack"
+  ],
+  "author": "@byverdu <byverdu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byverdu/meanStackPost/issues"
+  },
+  "homepage": "https://github.com/byverdu/meanStackPost#readme"
+}
