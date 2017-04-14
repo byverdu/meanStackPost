@@ -4,7 +4,8 @@
   "description": "imdb application to explain how mean stack works",
   "main": "index.js",
   "scripts": {
-    "test":  "nodemon --exec \"mocha --compilers js:babel-core/register\" test"
+    "test": "nodemon --exec \"mocha --compilers js:babel-core/register\" test",
+    "start": "nodemon --exec  babel-node  server.js"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,8 @@
     "eslint-plugin-mocha": "^4.9.0",
     "eslint-plugin-react": "^6.10.3",
     "sinon": "^2.1.0",
-    "sinon-chai": "^2.9.0"
+    "sinon-chai": "^2.9.0",
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "express": "^4.15.2"

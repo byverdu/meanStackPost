@@ -17,3 +17,19 @@ describe( 'Root path', () => {
       });
   });
 });
+
+describe( 'Not Found path', () => {
+  it( 'Visiting a not known route should return 404', ( done ) => {
+    request( server )
+      .get( '/notFound' )
+      .expect( 404 )
+      .expect( 'Sorry route not found' )
+      .end(( err, res ) => {
+        if ( err ) {
+          done( err );
+        } else {
+          done();
+        }
+      });
+  });
+});
