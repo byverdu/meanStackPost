@@ -4,7 +4,7 @@
   "description": "imdb application to explain how mean stack works",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --watch"
+    "test":  "nodemon --exec \"mocha --compilers js:babel-core/register\" test"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,21 @@
   },
   "homepage": "https://github.com/byverdu/meanStackPost#readme",
   "devDependencies": {
+    "babel-eslint": "^7.2.2",
     "babel-preset-es2015": "^6.24.1",
-    "babel-register": "^6.24.1"
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-import": "^0.13.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-mocha": "^4.9.0",
+    "eslint-plugin-react": "^6.10.3",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
   }
 }

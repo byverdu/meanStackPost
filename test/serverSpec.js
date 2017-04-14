@@ -1,9 +1,19 @@
-import chai from "chai";
+import server from '../server';
 
-const expect = chai.expect;
+const request = require('supertest'); // eslint-disable-line
 
-describe('Should run the first test', () => {
-  it('3+4 = 7', () => {
-    expect(3+4).to.equal(7)
+describe( 'Root path', () => {
+  it( 'Visiting the root path should return 200', ( done ) => {
+    request( server )
+      .get( '/' )
+      .expect( 200 )
+      .expect( 'Up and running' )
+      .end(( err, res ) => {
+        if ( err ) {
+          done( err );
+        } else {
+          done();
+        }
+      });
   });
 });
