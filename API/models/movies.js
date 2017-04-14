@@ -5,7 +5,11 @@ const MovieSchema = new Schema({
   title: String,
   poster: String,
   rating: Number,
-  myRating: Number
+  myRating: Number,
+  year: Number,
+  imdbUrl: String,
+  genres: [String],
+  actors: [String]
 });
 
 module.exports = MovieSchema;

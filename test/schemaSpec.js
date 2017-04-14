@@ -39,5 +39,17 @@ describe( 'Schema test cases', () => {
     it( 'has a myRating property that is a Number', () => {
       expect( movie.myRating ).to.be.a( 'number' );
     });
+    it( 'has a year property that is a Number', () => {
+      expect( movie.year ).to.be.a( 'number' );
+    });
+    it( 'has a imdbUrl property that is a Number', () => {
+      expect( movie.imdbUrl ).to.be.a( 'string' ).and.contains( 'https' );
+    });
+    it( 'has a genres property that is an Array of String', () => {
+      expect( movie.genres ).to.be.instanceof( Array ).and.contains( 'Action' );
+    });
+    it( 'has a actors property that is an Array of String', () => {
+      expect( movie.actors ).to.be.instanceof( Array ).and.contains( 'Michael Herz' );
+    });
   });
 });
