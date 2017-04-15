@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "express": "^4.15.2",
+    "imdb-api": "^2.2.2",
     "mongoose": "^4.9.4"
   }
 }
