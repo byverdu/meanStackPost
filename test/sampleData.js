@@ -11,7 +11,7 @@ const movieData = {
   actors: ['Michael Herz', 'Lloyd Kaufman']
 };
 
-const showData = Object.assign( movieData, { seasons: 6 });
+const showData = Object.assign({}, movieData, { title: 'Lost', seasons: 6 });
 
 const sampleMovie = {
   title: 'Star Wars: Episode IV - A New Hope',

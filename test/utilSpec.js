@@ -16,7 +16,7 @@ describe( 'Util helper methods', () => {
     expect( util.toNumber ).to.be.a( 'function' );
   });
   it( 'Util.toNumber converts a String to Number', () => {
-    expect( util.toNumber( '3.4' )).to.be.eql( 3.4 );
+    expect( util.toNumber( sampleMovie.rating )).to.be.eql( 8.7 );
   });
   it( 'Util.toNumber will throw an Error when trying to convert a non numeric String', () => {
     expect( util.toNumber ).to.throw( TypeError, /A string can't be converted to Number/ );
