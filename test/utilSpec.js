@@ -3,8 +3,10 @@
 
 import chai from 'chai';
 import { util } from '../utils/index';
+import sampleData from './sampleData';
 
 const expect = chai.expect;
+const { sampleMovie } = sampleData;
 
 describe( 'Util helper methods', () => {
   it( 'Util is defined', () => {
@@ -16,7 +18,13 @@ describe( 'Util helper methods', () => {
   it( 'Util.toNumber converts a String to Number', () => {
     expect( util.toNumber( '3.4' )).to.be.eql( 3.4 );
   });
-  it( 'Util.toNumber will throw an Error when trying to convert a String', () => {
+  it( 'Util.toNumber will throw an Error when trying to convert a non numeric String', () => {
     expect( util.toNumber ).to.throw( TypeError, /A string can't be converted to Number/ );
+  });
+  it( 'Util.splitString is defined', () => {
+    expect( util.splitString ).not.equal( undefined );
+  });
+  it( 'Util.splitString returns a split array', () => {
+    expect( util.splitString( sampleMovie.genres )).to.eql(['Action', 'Adventure', 'Fantasy']);
   });
 });
