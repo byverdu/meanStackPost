@@ -9,9 +9,11 @@ const movieData = {
   imdbUrl: 'https://www.imdb.com/title/tt0090190',
   genres: ['Action', 'Comedy', 'Horror'],
   actors: ['Michael Herz', 'Lloyd Kaufman']
-
 };
 
+const showData = Object.assign( movieData, { seasons: 6 });
+
 export default {
-  movieData
+  movieData,
+  showData
 };

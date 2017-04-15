@@ -4,18 +4,24 @@
 import chai from 'chai';
 import mongoose from 'mongoose';
 import MovieSchema from '../API/models/movies';
+import ShowSchema from '../API/models/tvShow';
 import sampleData from './sampleData';
 
 const expect = chai.expect;
 let connection;
 let Movie;
 let movie;
-const { movieData } = sampleData;
+let TVShow;
+let tvShow;
+
+const { movieData, showData } = sampleData;
 
 before(( done ) => {
   connection = mongoose.createConnection( 'mongodb://127.0.0.1/example-test' );
   Movie = connection.model( 'Movie', MovieSchema );
+  TVShow = connection.model( 'TVShow', ShowSchema );
   movie = new Movie( movieData );
+  tvShow = new TVShow( showData );
   connection.once( 'open', () => done());
 });
 
@@ -50,6 +56,16 @@ describe( 'Schema test cases', () => {
     });
     it( 'has a actors property that is an Array of String', () => {
       expect( movie.actors ).to.be.instanceof( Array ).and.contains( 'Michael Herz' );
+    });
+  });
+  describe( 'TvShowSchema shape', () => {
+    it( 'has same properties than MovieSchema', () => {
+      const movieKeys = Object.keys( MovieSchema.obj );
+      const showKeys = Object.keys( ShowSchema.obj );
+      expect( showKeys ).to.eql( movieKeys );
+    });
+    it( 'has a seasons property that is a Number', () => {
+      expect( tvShow.seasons ).to.be.a( 'Number' );
     });
   });
 });
