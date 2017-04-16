@@ -5,6 +5,7 @@ import chai from 'chai';
 import mongoose from 'mongoose';
 import MovieSchema from '../API/models/MovieSchema';
 import ShowSchema from '../API/models/ShowSchema';
+import { BaseModel } from '../API/models/BaseSchema';
 import sampleData from './sampleData';
 
 const expect = chai.expect;
@@ -18,8 +19,8 @@ const { movieData, showData } = sampleData;
 
 before(( done ) => {
   connection = mongoose.createConnection( 'mongodb://127.0.0.1/example-test' );
-  Movie = connection.model( 'Movie', MovieSchema );
-  TVShow = Movie.discriminator( 'TVShow', ShowSchema );
+  Movie = BaseModel.discriminator( 'Movie', MovieSchema );
+  TVShow = BaseModel.discriminator( 'TVShow', ShowSchema );
   movie = new Movie( movieData );
   tvShow = new TVShow( showData );
   connection.once( 'open', () => done());
@@ -35,6 +36,7 @@ describe( 'Schema test cases', () => {
   describe( 'MovieSchema shape', () => {
     it( 'has a title property that is a String', () => {
       // movie.getTitle();
+      console.log(movie);
       expect( movie.title ).to.be.a( 'string' );
     });
     it( 'has a poster property that is a String', () => {

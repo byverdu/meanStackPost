@@ -1,4 +1,4 @@
-import BaseSchema from './BaseSchema';
+import { BaseSchema } from './BaseSchema';
 
 const ShowSchema = new BaseSchema({ seasons: Number });
 

@@ -4,10 +4,10 @@ import util from 'util';
 const Schema = mongoose.Schema;
 
 function BaseSchema() {
-  Schema.apply( this, arguments );
+  mongoose.Schema.apply( this, arguments );
 
   this.add({
-    model: { type: Schema.Types.ObjectId, ref: 'Model', required: true },
+    kind: { type: String },
     title: { type: String },
     poster: { type: String },
     rating: { type: Number },
@@ -20,5 +20,9 @@ function BaseSchema() {
 }
 
 util.inherits( BaseSchema, Schema );
+const BaseModel = mongoose.model( 'BaseModel', new BaseSchema());
 
-module.exports = BaseSchema;
+export {
+  BaseSchema,
+  BaseModel
+};
