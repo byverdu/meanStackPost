@@ -35,8 +35,6 @@ after(( done ) => {
 describe( 'Schema test cases', () => {
   describe( 'MovieSchema shape', () => {
     it( 'has a title property that is a String', () => {
-      // movie.getTitle();
-      console.log(movie);
       expect( movie.title ).to.be.a( 'string' );
     });
     it( 'has a poster property that is a String', () => {
@@ -51,8 +49,8 @@ describe( 'Schema test cases', () => {
     it( 'has a year property that is a Number', () => {
       expect( movie.year ).to.be.a( 'number' );
     });
-    it( 'has a imdbUrl property that is a Number', () => {
-      expect( movie.imdbUrl ).to.be.a( 'string' ).and.contains( 'https' );
+    it( 'has a imdburl property that is a String', () => {
+      expect( movie.imdburl ).to.be.a( 'string' ).and.contains( 'https' );
     });
     it( 'has a genres property that is an Array of String', () => {
       expect( movie.genres ).to.be.instanceof( Array ).and.contains( 'Action' );
@@ -62,11 +60,6 @@ describe( 'Schema test cases', () => {
     });
   });
   describe( 'TvShowSchema shape', () => {
-    xit( 'has same properties than MovieSchema', () => {
-      const movieKeys = Object.keys( MovieSchema );
-      const showKeys = Object.keys( ShowSchema );
-      expect( showKeys ).to.eql( movieKeys );
-    });
     it( 'has a seasons property that is a Number', () => {
       expect( tvShow.seasons ).to.be.a( 'Number' );
     });

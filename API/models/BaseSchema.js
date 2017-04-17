@@ -13,7 +13,7 @@ function BaseSchema() {
     rating: { type: Number },
     myRating: { type: Number },
     year: { type: Number },
-    imdbUrl: { type: String },
+    imdburl: { type: String },
     genres: { type: [String] },
     actors: { type: [String] }
   });

@@ -6,7 +6,7 @@ const movieData = {
   rating: 8,
   myRating: 8.4,
   year: 1999,
-  imdbUrl: 'https://www.imdb.com/title/tt0090190',
+  imdburl: 'https://www.imdb.com/title/tt0090190',
   genres: ['Action', 'Comedy', 'Horror'],
   actors: ['Michael Herz', 'Lloyd Kaufman']
 };
@@ -47,8 +47,22 @@ const sampleMovie = {
   imdburl: 'https://www.imdb.com/title/tt0076759'
 };
 
+const movieDataConverted = {
+  title: 'Star Wars: Episode IV - A New Hope',
+  poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BYzQ2OTk4N2QtOGQwNy00MmI3LWEwNmEtOTk0OTY3NDk2MGJkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg',
+  rating: '8.7',
+  year: 1977,
+  imdburl: 'https://www.imdb.com/title/tt0076759',
+  genres: ['Action', 'Adventure', 'Fantasy'],
+  actors: ['Mark Hamill', 'Harrison Ford', 'Carrie Fisher', 'Peter Cushing']
+};
+
+const splitString = str => str.split( ',' ).map( item => item.trim());
+
 export default {
   movieData,
   showData,
-  sampleMovie
+  sampleMovie,
+  movieDataConverted,
+  splitString
 };
