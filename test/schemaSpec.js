@@ -18,7 +18,7 @@ let tvShow;
 const { movieData, showData } = sampleData;
 
 before(( done ) => {
-  connection = mongoose.createConnection( 'mongodb://127.0.0.1/example-test' );
+  connection = mongoose.createConnection( 'mongodb://localhost/imdbApp' );
   Movie = BaseModel.discriminator( 'Movie', MovieSchema );
   TVShow = BaseModel.discriminator( 'TVShow', ShowSchema );
   movie = new Movie( movieData );

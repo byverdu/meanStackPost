@@ -20,7 +20,7 @@ function BaseSchema() {
 }
 
 util.inherits( BaseSchema, Schema );
-const BaseModel = mongoose.model( 'BaseModel', new BaseSchema());
+const BaseModel = mongoose.model( 'Imdb', new BaseSchema());
 
 export {
   BaseSchema,

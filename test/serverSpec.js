@@ -18,6 +18,24 @@ describe( 'Routing test cases', () => {
     });
   });
 
+  describe( 'Movies route', () => {
+    it( 'Movies route should return 200', () => {
+      request( server )
+      .get( '/movies' )
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'Rambo' ));
+    });
+  });
+
+  describe( 'TVShow route', () => {
+    it( 'Movies route should return 200', () => {
+      request( server )
+      .get( '/tvshows' )
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'V' ));
+    });
+  });
+
   describe( 'Not Found route', () => {
     it( 'Visiting a not known route should return 404', () => {
       request( server )
