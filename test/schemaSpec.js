@@ -3,24 +3,21 @@
 
 import chai from 'chai';
 import mongoose from 'mongoose';
-import MovieSchema from '../API/models/MovieSchema';
-import ShowSchema from '../API/models/ShowSchema';
 import { BaseModel } from '../API/models/BaseSchema';
+import Movie from '../API/models/MovieSchema';
+import TVShow from '../API/models/ShowSchema';
+import { util } from '../utils';
 import sampleData from './sampleData';
 
 const expect = chai.expect;
 let connection;
-let Movie;
 let movie;
-let TVShow;
 let tvShow;
 
 const { movieData, showData } = sampleData;
 
 before(( done ) => {
   connection = mongoose.createConnection( 'mongodb://localhost/imdbApp' );
-  Movie = BaseModel.discriminator( 'Movie', MovieSchema );
-  TVShow = BaseModel.discriminator( 'TVShow', ShowSchema );
   movie = new Movie( movieData );
   tvShow = new TVShow( showData );
   connection.once( 'open', () => done());
