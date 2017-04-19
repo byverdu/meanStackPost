@@ -57,6 +57,44 @@ const movieDataConverted = {
   actors: ['Mark Hamill', 'Harrison Ford', 'Carrie Fisher', 'Peter Cushing']
 };
 
+const sampleTvshow = {
+  title: 'My Wife and Kids',
+  _year_data: '2001–2005',
+  rated: 'TV-PG',
+  released: '2001-03-27',
+  runtime: '30 min',
+  genres: 'Comedy, Romance',
+  director: 'N/A',
+  writer: 'Don Reo, Damon Wayans',
+  actors: 'Damon Wayans, Tisha Campbell-Martin, George Gore II, Parker McKenna Posey',
+  plot: 'Damon Wayans plays Michael Kyle, a man on a tragically funny quest for a "traditional" family. He\'s a not-so-modern man living in a very modern world. Can you relate? His stay-at-home bride (Tisha Campbell-Martin) became a stock market trailblazer. His only son idolizes gangster rap stars instead of him. His moody, adolescent daughter\'s two favorite hobbies are asking him for money and giving him grief. And his youngest daughter rarely lets her daddy have the last word. Perhaps after all of the chaos is over, he will realize that his dream of having a normal American family came true a long time ago.',
+  languages: 'English',
+  country: 'USA',
+  awards: '10 wins & 36 nominations.',
+  poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTk0OTI3ODUzNl5BMl5BanBnXkFtZTcwOTUwMDUyMw@@._V1_SX300.jpg',
+  metascore: 'N/A',
+  rating: '6.8',
+  votes: '21,795',
+  imdbid: 'tt0273855',
+  type: 'series',
+  totalseasons: 5,
+  response: 'True',
+  series: true,
+  imdburl: 'https://www.imdb.com/title/tt0273855',
+  _episodes: [],
+  start_year: 2001,
+  end_year: null
+};
+
+const tvShowDataConverted = { title: 'My Wife and Kids',
+  genres: ['Comedy', 'Romance'],
+  actors: ['Damon Wayans', 'Tisha Campbell-Martin', 'George Gore II', 'Parker McKenna Posey'],
+  poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTk0OTI3ODUzNl5BMl5BanBnXkFtZTcwOTUwMDUyMw@@._V1_SX300.jpg',
+  rating: '6.8',
+  imdburl: 'https://www.imdb.com/title/tt0273855',
+  seasons: 5
+};
+
 const splitString = str => str.split( ',' ).map( item => item.trim());
 
 export default {
@@ -64,5 +102,7 @@ export default {
   showData,
   sampleMovie,
   movieDataConverted,
-  splitString
+  splitString,
+  sampleTvshow,
+  tvShowDataConverted
 };

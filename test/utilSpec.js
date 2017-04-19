@@ -9,7 +9,9 @@ const expect = chai.expect;
 const {
   sampleMovie,
   movieDataConverted,
-  splitString
+  splitString,
+  sampleTvshow,
+  tvShowDataConverted
 } = sampleData;
 
 describe( 'Util helper methods', () => {
@@ -36,5 +38,8 @@ describe( 'Util helper methods', () => {
   });
   it( 'Util.objectToSave convert values from API response into mongo docs', () => {
     expect( util.objectToSave( sampleMovie )).to.eql( movieDataConverted );
+  });
+  it( 'Util.objectToSave adds seasons prop when is a tvShow', () => {
+    expect( util.objectToSave( sampleTvshow )).to.eql( tvShowDataConverted );
   });
 });

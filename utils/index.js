@@ -10,19 +10,24 @@ const toNumber = ( str ) => {
 
 exports.util = {
 
-  objectToSave: ( movieData ) => {
-    const movieKeys = Object.keys( movieData );
+  objectToSave: ( imdbData ) => {
+    const imdbKeys = Object.keys( imdbData );
     const props = [
       'title', 'poster', 'rating', 'year', 'imdburl', 'genres', 'actors'
     ];
     const tempObj = {};
 
-    movieKeys.forEach(( key ) => {
+    imdbKeys.forEach(( key ) => {
       if ( props.indexOf( key ) >= 0 ) {
-        tempObj[ key ] = movieData[ key ];
+        tempObj[ key ] = imdbData[ key ];
 
+        // Convert genres and actors into arrays
         if ( key === 'genres' || key === 'actors' ) {
-          tempObj[ key ] = splitString( movieData[ key ]);
+          tempObj[ key ] = splitString( imdbData[ key ]);
+        }
+        // add number seasons prop for tvshows
+        if ( imdbData.series ) {
+          tempObj.seasons = imdbData.totalseasons;
         }
       }
     });
