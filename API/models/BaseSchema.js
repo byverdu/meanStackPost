@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import util from 'util';
 
 const Schema = mongoose.Schema;
+mongoose.Promise = global.Promise;
 
 function BaseSchema() {
   mongoose.Schema.apply( this, arguments );
