@@ -6,4 +6,11 @@ module.exports = ( router, baseModel ) => {
       res.send( `${response[ 0 ].title}` );
     });
   });
+
+  router.get( '/movies/:title', ( req, res ) => {
+    const moviePage = req.params.title;
+    baseModel.findOne({ title: `${moviePage}` }).then(( response ) => {
+      res.send( `${response.title}` );
+    });
+  });
 };

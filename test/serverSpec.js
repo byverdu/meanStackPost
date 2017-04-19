@@ -25,6 +25,13 @@ describe( 'Routing test cases', () => {
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Rambo' ));
     });
+
+    it( 'A page per movie should be displayed', () => {
+      request( server )
+      .get( '/movies/starwars' )
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'starwars' ));
+    });
   });
 
   describe( 'TVShow route', () => {
@@ -33,6 +40,12 @@ describe( 'Routing test cases', () => {
       .get( '/tvshows' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'V' ));
+    });
+    it( 'A page per tvShow should be displayed', () => {
+      request( server )
+      .get( '/tvshows/Castle' )
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'Castle' ));
     });
   });
 
