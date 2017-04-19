@@ -36,6 +36,25 @@ describe( 'Routing test cases', () => {
     });
   });
 
+  describe( 'Post request', () => {
+    it( 'Adding a new movie', () => {
+      request( server )
+      .post( '/' )
+      .send({ type: 'movie' })
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'new movies added' )
+      );
+    });
+    it( 'Adding a new tvShow', () => {
+      request( server )
+      .post( '/' )
+      .send({ type: 'tvshow' })
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'new tvshow added' )
+      );
+    });
+  });
+
   describe( 'Not Found route', () => {
     it( 'Visiting a not known route should return 404', () => {
       request( server )
