@@ -15,7 +15,7 @@ const expect = chai.expect;
 let movie;
 let tvShow;
 
-const { movieData, showData, newMovie } = sampleData;
+const { movieData, showData, newMovie, sampleTvshow } = sampleData;
 
 before(() => {
   movie = new Movie( movieData );
@@ -59,14 +59,24 @@ describe( 'Schema test cases', () => {
       expect( tvShow.seasons ).to.be.a( 'Number' );
     });
   });
-  describe( 'Saving new instances of Movie', () => {
-    it( 'A new movie can be saved', () => {
+  describe( 'Saving new documents, movie or tvShow', () => {
+    it( 'A new movie can be saved to db', () => {
       const trainspotting = util.objectToSave( newMovie );
       const newMovieImdb = new Movie( trainspotting );
       newMovieImdb.save().then(() => {
         BaseModel.find({ __t: 'Movie' }).then(( response ) => {
           expect( response[ response.length - 1 ].title ).to.equal( 'Trainspotting' );
           BaseModel.remove({ title: 'Trainspotting' }).exec();
+        });
+      });
+    });
+    it( 'A new tvShow can be saved to db', () => {
+      const wifeKids = util.objectToSave( sampleTvshow );
+      const newTvshow = new TVShow( wifeKids );
+      newTvshow.save().then(() => {
+        BaseModel.find({ __t: 'TVShow' }).then(( response ) => {
+          expect( response[ response.length - 1 ].title ).to.equal( 'My Wife and Kids' );
+          BaseModel.remove({ title: 'My Wife and Kids' }).exec();
         });
       });
     });
