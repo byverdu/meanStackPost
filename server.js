@@ -5,7 +5,9 @@ const bodyParser = require( 'body-parser' );
 const allRoutes = require( './routes/allRoutes' );
 const notFoundRoute = require( './routes/404' );
 
-require( './API/db' )();
+if ( process.env.NODE_ENV !== 'test' ) {
+  require( './API/db' )();
+}
 
 const app = Express();
 

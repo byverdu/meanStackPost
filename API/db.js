@@ -23,6 +23,10 @@ module.exports = function () {
     dbURL = 'mongodb://localhost/imdbApp';
   }
 
+  if ( process.env.NODE_ENV === 'test' ) {
+    dbURL = 'mongodb://localhost/imdbAppTest';
+  }
+
   if ( process.env.NODE_ENV === 'production' ) {
     dbURL = process.env.MONGO_IMDB_URL;
   }

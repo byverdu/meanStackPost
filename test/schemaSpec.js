@@ -3,28 +3,24 @@
 
 import chai from 'chai';
 import mongoose from 'mongoose';
-import { BaseModel } from '../API/models/BaseSchema';
 import Movie from '../API/models/MovieSchema';
 import TVShow from '../API/models/ShowSchema';
-import { util } from '../utils';
 import sampleData from './sampleData';
 
+require( '../API/db' )();
+
 const expect = chai.expect;
-let connection;
 let movie;
 let tvShow;
 
 const { movieData, showData } = sampleData;
 
-before(( done ) => {
-  connection = mongoose.createConnection( 'mongodb://localhost/imdbApp' );
+before(() => {
   movie = new Movie( movieData );
   tvShow = new TVShow( showData );
-  connection.once( 'open', () => done());
 });
 
-after(( done ) => {
-  connection.close(() => done());
+after(() => {
   mongoose.models = {};
   mongoose.modelSchemas = {};
 });

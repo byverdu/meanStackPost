@@ -28,9 +28,9 @@ describe( 'Routing test cases', () => {
 
     it( 'A page per movie should be displayed', () => {
       request( server )
-      .get( '/movies/starwars' )
+      .get( '/movies/Rambo' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'starwars' ));
+      .then( response => expect( response.text ).to.equal( 'Rambo' ));
     });
   });
 
@@ -39,13 +39,13 @@ describe( 'Routing test cases', () => {
       request( server )
       .get( '/tvshows' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'V' ));
+      .then( response => expect( response.text ).to.equal( 'Lost' ));
     });
     it( 'A page per tvShow should be displayed', () => {
       request( server )
-      .get( '/tvshows/Castle' )
+      .get( '/tvshows/Lost' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'Castle' ));
+      .then( response => expect( response.text ).to.equal( 'Lost' ));
     });
   });
 

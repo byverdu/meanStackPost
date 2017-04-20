@@ -4,7 +4,7 @@
   "description": "imdb application to explain how mean stack works",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec \"mocha --compilers js:babel-core/register\" test",
+    "test": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register\" test",
     "start": "nodemon --exec  babel-node  server.js"
   },
   "repository": {
