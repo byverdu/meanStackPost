@@ -3,8 +3,10 @@
 
 import chai from 'chai';
 import mongoose from 'mongoose';
+import { BaseModel } from '../API/models/BaseSchema';
 import Movie from '../API/models/MovieSchema';
 import TVShow from '../API/models/ShowSchema';
+import { util } from '../utils';
 import sampleData from './sampleData';
 
 require( '../API/db' )();
@@ -13,7 +15,7 @@ const expect = chai.expect;
 let movie;
 let tvShow;
 
-const { movieData, showData } = sampleData;
+const { movieData, showData, newMovie } = sampleData;
 
 before(() => {
   movie = new Movie( movieData );
@@ -55,6 +57,18 @@ describe( 'Schema test cases', () => {
   describe( 'TvShowSchema shape', () => {
     it( 'has a seasons property that is a Number', () => {
       expect( tvShow.seasons ).to.be.a( 'Number' );
+    });
+  });
+  describe( 'Saving new instances of Movie', () => {
+    it( 'A new movie can be saved', () => {
+      const trainspotting = util.objectToSave( newMovie );
+      const newMovieImdb = new Movie( trainspotting );
+      newMovieImdb.save().then(() => {
+        BaseModel.find({ __t: 'Movie' }).then(( response ) => {
+          expect( response[ response.length - 1 ].title ).to.equal( 'Trainspotting' );
+          BaseModel.remove({ title: 'Trainspotting' }).exec();
+        });
+      });
     });
   });
 });

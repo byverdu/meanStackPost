@@ -95,6 +95,39 @@ const tvShowDataConverted = { title: 'My Wife and Kids',
   seasons: 5
 };
 
+const newMovie = {
+  title: 'Trainspotting',
+  _year_data: '1996',
+  year: 1996,
+  rated: 'R',
+  released: '1996-08-08',
+  runtime: '94 min',
+  genres: 'Drama',
+  director: 'Danny Boyle',
+  writer: 'John Hodge (screenplay), Irvine Welsh (novel)',
+  actors: 'Ewan McGregor, Ewen Bremner, Jonny Lee Miller, Kevin McKidd',
+  plot: 'A wild, freeform, Rabelaisian trip through the darkest recesses of Edinburgh low-life, focusing on Mark Renton and his attempt to give up his heroin habit, and how the latter affects his relationship with family and friends: Sean Connery wannabe Sick Boy, dimbulb Spud, psycho Begbie, 14-year-old girlfriend Diane, and clean-cut athlete Tommy, who\'s never touched drugs but can\'t help being curious about them...',
+  languages: 'English',
+  country: 'UK',
+  awards: 'Nominated for 1 Oscar. Another 20 wins & 26 nominations.',
+  poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMzA5Zjc3ZTMtMmU5YS00YTMwLWI4MWUtYTU0YTVmNjVmODZhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
+  ratings:
+   [ { Source: 'Internet Movie Database', Value: '8.2/10' },
+     { Source: 'Rotten Tomatoes', Value: '90%' },
+     { Source: 'Metacritic', Value: '83/100' } ],
+  metascore: '83',
+  rating: '8.2',
+  votes: '508,382',
+  imdbid: 'tt0117951',
+  type: 'movie',
+  dvd: '24 Mar 1998',
+  boxoffice: 'N/A',
+  production: 'Miramax Films',
+  website: 'http://www.miramax.com/movie/trainspotting/',
+  response: 'True',
+  series: false,
+  imdburl: 'https://www.imdb.com/title/tt0117951' }
+
 const splitString = str => str.split( ',' ).map( item => item.trim());
 
 export default {
@@ -104,5 +137,6 @@ export default {
   movieDataConverted,
   splitString,
   sampleTvshow,
-  tvShowDataConverted
+  tvShowDataConverted,
+  newMovie
 };
