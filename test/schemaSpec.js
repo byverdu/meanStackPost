@@ -14,12 +14,14 @@ require( '../API/db' )();
 const expect = chai.expect;
 let movie;
 let tvShow;
+let baseModel;
 
 const { movieData, showData, newMovie, sampleTvshow } = sampleData;
 
 before(() => {
   movie = new Movie( movieData );
   tvShow = new TVShow( showData );
+  baseModel = new BaseModel();
 });
 
 after(() => {
@@ -28,22 +30,33 @@ after(() => {
 });
 
 describe( 'Schema test cases', () => {
-  describe( 'MovieSchema shape', () => {
+  describe( 'BaseSchema shape', () => {
     it( 'has a title property that is a String', () => {
-      expect( movie.title ).to.be.a( 'string' );
+      expect( baseModel.title ).to.be.a( 'string' );
     });
     it( 'has a poster property that is a String', () => {
-      expect( movie.poster ).to.be.a( 'string' ).and.contains( '.jpg' );
+      expect( baseModel.poster ).to.be.a( 'string' );
     });
     it( 'has a rating property that is a Number', () => {
-      expect( movie.rating ).to.be.a( 'number' );
+      expect( baseModel.rating ).to.be.a( 'string' );
     });
     it( 'has a myRating property that is a Number', () => {
-      expect( movie.myRating ).to.be.a( 'number' );
+      expect( baseModel.myRating ).to.be.a( 'string' );
     });
     it( 'has a year property that is a Number', () => {
-      expect( movie.year ).to.be.a( 'number' );
+      expect( baseModel.year ).to.be.a( 'number' );
     });
+    it( 'has a imdburl property that is a String', () => {
+      expect( baseModel.imdburl ).to.be.a( 'string' );
+    });
+    it( 'has a genres property that is an Array of String', () => {
+      expect( baseModel.genres ).to.be.instanceof( Array );
+    });
+    it( 'has a actors property that is an Array of String', () => {
+      expect( baseModel.actors ).to.be.instanceof( Array );
+    });
+  });
+  describe( 'MovieSchema shape', () => {
     it( 'has a imdburl property that is a String', () => {
       expect( movie.imdburl ).to.be.a( 'string' ).and.contains( 'https' );
     });

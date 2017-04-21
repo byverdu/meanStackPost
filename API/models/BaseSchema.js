@@ -8,15 +8,14 @@ function BaseSchema() {
   mongoose.Schema.apply( this, arguments );
 
   this.add({
-    kind: { type: String },
-    title: { type: String },
-    poster: { type: String },
-    rating: { type: Number },
-    myRating: { type: Number },
-    year: { type: Number },
-    imdburl: { type: String },
-    genres: { type: [String] },
-    actors: { type: [String] }
+    title: { type: String, default: '' },
+    poster: { type: String, default: '' },
+    rating: { type: String, default: '' },
+    myRating: { type: String, default: '' },
+    year: { type: Number, default: 0 },
+    imdburl: { type: String, default: '' },
+    genres: { type: [String], default: [] },
+    actors: { type: [String], default: [] }
   });
 }
 
