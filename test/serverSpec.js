@@ -39,6 +39,14 @@ describe( 'Routing test cases', () => {
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Rambo' ));
     });
+
+    it( 'myRating property can be set', () => {
+      request( server )
+      .post( '/movies/Rambo' )
+      .send({ rating: '5.6' })
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'myRating: 5.6' ));
+    });
   });
 
   describe( 'TVShow route', () => {

@@ -15,4 +15,15 @@ module.exports = ( router, baseModel ) => {
       res.send( `${response.title}` );
     });
   });
+
+  router.post( '/movies/:title', ( req, res ) => {
+    const moviePage = req.params.title;
+    const movieRating = req.body.rating;
+
+    const promiseFindOne = baseModel.findOne({ title: `${moviePage}` }).exec();
+    promiseFindOne.then(( movie ) => {
+      movie.setMyRating( movieRating );
+      movie.save().then( result => res.send( `myRating: ${result.myRating}` ));
+    });
+  });
 };
