@@ -95,7 +95,7 @@ describe( 'Schema test cases', () => {
       expect( tvShow.myRating ).to.equal( '9.5' );
     });
   });
-  describe( 'Saving new documents, movie or tvShow', () => {
+  describe( 'Saving and deleting documents for movie or tvShow', () => {
     it( 'A new movie can be saved to db', () => {
       const trainspotting = util.objectToSave( newMovie );
       const newMovieImdb = new Movie( trainspotting );
@@ -106,6 +106,16 @@ describe( 'Schema test cases', () => {
         });
       });
     });
+    it( 'A saved movie can be deleted from db', () => {
+      setTimeout(() => {
+        const newMovieImdb = new Movie({ title: 'Die Hard' });
+        newMovieImdb.save();
+        BaseModel.remove({ title: 'Die Hard' }).exec();
+        BaseModel.findOne({ title: 'Die Hard' }).then(( response ) => {
+          expect( response ).to.eql( null );
+        });
+      }, 2000 );
+    });
     it( 'A new tvShow can be saved to db', () => {
       const wifeKids = util.objectToSave( sampleTvshow );
       const newTvshow = new TVShow( wifeKids );
@@ -115,6 +125,16 @@ describe( 'Schema test cases', () => {
           BaseModel.remove({ title: 'My Wife and Kids' }).exec();
         });
       });
+    });
+    it( 'A saved tvShow can be deleted from db', () => {
+      setTimeout(() => {
+        const newMovieImdb = new TVShow({ title: 'Silicon Valley' });
+        newMovieImdb.save();
+        BaseModel.remove({ title: 'Silicon Valley' }).exec();
+        BaseModel.findOne({ title: 'Silicon Valley' }).then(( response ) => {
+          expect( response ).to.eql( null );
+        });
+      }, 3000 );
     });
   });
 });
