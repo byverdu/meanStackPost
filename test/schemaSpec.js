@@ -3,7 +3,7 @@
 
 import chai from 'chai';
 import mongoose from 'mongoose';
-import { BaseModel } from '../API/models/BaseSchema';
+import { BaseModel, BaseSchema } from '../API/models/BaseSchema';
 import Movie from '../API/models/MovieSchema';
 import TVShow from '../API/models/ShowSchema';
 import { util } from '../utils';
@@ -57,8 +57,19 @@ describe( 'Schema test cases', () => {
     });
   });
   describe( 'MovieSchema shape', () => {
-    it( 'has a imdburl property that is a String', () => {
-      expect( movie.imdburl ).to.be.a( 'string' ).and.contains( 'https' );
+    it( 'is an instance of BaseSchema', () => {
+      expect( Movie.schema ).to.be.an.instanceof( BaseSchema );
+    });
+    it( 'has the same properties than the BaseSchema', () => {
+      const schemaKeys = Object.keys( baseModel );
+      const movieKeys = Object.keys( movie );
+      expect( movieKeys ).to.be.eql( schemaKeys );
+    });
+    it( 'poster property will be an url to an image', () => {
+      expect( movie.poster ).to.match( /^http|jpg/ );
+    });
+    it( 'imdburl property will be an url', () => {
+      expect( movie.imdburl ).to.include( 'https' );
     });
     it( 'has a genres property that is an Array of String', () => {
       expect( movie.genres ).to.be.instanceof( Array ).and.contains( 'Action' );
@@ -68,6 +79,9 @@ describe( 'Schema test cases', () => {
     });
   });
   describe( 'TvShowSchema shape', () => {
+    it( 'is an instance of BaseSchema', () => {
+      expect( TVShow.schema ).to.be.an.instanceof( BaseSchema );
+    });
     it( 'has a seasons property that is a Number', () => {
       expect( tvShow.seasons ).to.be.a( 'Number' );
     });
