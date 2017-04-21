@@ -10,7 +10,10 @@ import server from '../server';
 import sampleData from './sampleData';
 
 const expect = chai.expect;
-const { movieDataConverted } = sampleData;
+const {
+  movieDataConverted,
+  tvShowDataConverted
+} = sampleData;
 
 describe( 'Routing test cases', () => {
   describe( 'Root route', () => {
@@ -68,9 +71,12 @@ describe( 'Routing test cases', () => {
     it( 'Adding a new tvShow', () => {
       request( server )
       .post( '/' )
-      .send({ type: 'tvshow' })
+      .send({ type: 'tvshow', tvshow: tvShowDataConverted })
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'new tvshow added' )
+      .then(( response ) => {
+        expect( response.text ).to.equal( 'My Wife and Kids' );
+        BaseModel.remove({ title: 'My Wife and Kids' }).exec();
+      }
       );
     });
   });
