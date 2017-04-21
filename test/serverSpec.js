@@ -62,6 +62,14 @@ describe( 'Routing test cases', () => {
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Lost' ));
     });
+
+    it( 'myRating property can be set', () => {
+      request( server )
+      .post( '/tvshows/Lost' )
+      .send({ rating: '8.6' })
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'myRating: 8.6' ));
+    });
   });
 
   describe( 'Post request', () => {
