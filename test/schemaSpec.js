@@ -77,6 +77,10 @@ describe( 'Schema test cases', () => {
     it( 'has a actors property that is an Array of String', () => {
       expect( movie.actors ).to.be.instanceof( Array ).and.contains( 'Michael Herz' );
     });
+    it( 'myRating property can be set', () => {
+      movie.setMyRating( '8.5' );
+      expect( movie.myRating ).to.equal( '8.5' );
+    });
   });
   describe( 'TvShowSchema shape', () => {
     it( 'is an instance of BaseSchema', () => {
@@ -84,6 +88,11 @@ describe( 'Schema test cases', () => {
     });
     it( 'has a seasons property that is a Number', () => {
       expect( tvShow.seasons ).to.be.a( 'Number' );
+    });
+
+    it( 'myRating property can be set', () => {
+      tvShow.setMyRating( '9.5' );
+      expect( tvShow.myRating ).to.equal( '9.5' );
     });
   });
   describe( 'Saving new documents, movie or tvShow', () => {

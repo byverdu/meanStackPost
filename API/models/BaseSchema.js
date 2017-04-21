@@ -17,6 +17,8 @@ function BaseSchema() {
     genres: { type: [String], default: [] },
     actors: { type: [String], default: [] }
   });
+
+  this.methods.setMyRating = function ( rating ) { this.myRating = rating; };
 }
 
 util.inherits( BaseSchema, Schema );
