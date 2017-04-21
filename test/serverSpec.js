@@ -4,9 +4,13 @@
 import chai from 'chai';
 import request from 'supertest';
 
+
+import { BaseModel } from '../API/models/BaseSchema';
 import server from '../server';
+import sampleData from './sampleData';
 
 const expect = chai.expect;
+const { movieDataConverted } = sampleData;
 
 describe( 'Routing test cases', () => {
   describe( 'Root route', () => {
@@ -53,9 +57,12 @@ describe( 'Routing test cases', () => {
     it( 'Adding a new movie', () => {
       request( server )
       .post( '/' )
-      .send({ type: 'movie' })
+      .send({ type: 'movie', movie: movieDataConverted })
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'new movies added' )
+      .then(( response ) => {
+        expect( response.text ).to.equal( 'Star Wars: Episode IV - A New Hope' );
+        BaseModel.remove({ title: 'Star Wars: Episode IV - A New Hope' }).exec();
+      }
       );
     });
     it( 'Adding a new tvShow', () => {

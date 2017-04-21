@@ -1,10 +1,11 @@
 // home
 
-module.exports = ( router ) => {
+module.exports = ( router, MovieModel ) => {
   router.get( '/', ( req, res ) => res.send( 'Up and running' ));
   router.post( '/', ( req, res ) => {
     if ( req.body.type === 'movie' ) {
-      res.send( 'new movies added' );
+      const toSave = new MovieModel( req.body.movie );
+      toSave.save().then( movie => res.send( `${movie.title}` ));
     }
     if ( req.body.type === 'tvshow' ) {
       res.send( 'new tvshow added' );
