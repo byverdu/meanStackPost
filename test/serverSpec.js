@@ -6,6 +6,8 @@ import request from 'supertest';
 
 
 import { BaseModel } from '../API/models/BaseSchema';
+import Movie from '../API/models/MovieSchema';
+import TVShow from '../API/models/ShowSchema';
 import server from '../server';
 import sampleData from './sampleData';
 
@@ -14,6 +16,18 @@ const {
   movieDataConverted,
   tvShowDataConverted
 } = sampleData;
+
+before(() => {
+  const movie = new Movie({ title: 'CasaBlanca' });
+  // movie.save();
+  BaseModel.findOne({ title: 'CasaBlanca' }).then(( response ) => {
+    console.log(response);
+  });
+});
+
+after(() => {
+  BaseModel.remove({ title: 'CasaBlanca' }).exec();
+});
 
 describe( 'Routing test cases', () => {
   describe( 'Root route', () => {
@@ -35,14 +49,14 @@ describe( 'Routing test cases', () => {
 
     it( 'A page per movie should be displayed', () => {
       request( server )
-      .get( '/movies/Rambo' )
+      .get( '/movies/58f93c39d4fe95ba0c16ddf2' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Rambo' ));
     });
 
     it( 'myRating property can be set', () => {
       request( server )
-      .post( '/movies/Rambo' )
+      .post( '/movies/58f93c39d4fe95ba0c16ddf2' )
       .send({ rating: '5.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 5.6' ));
@@ -58,14 +72,14 @@ describe( 'Routing test cases', () => {
     });
     it( 'A page per tvShow should be displayed', () => {
       request( server )
-      .get( '/tvshows/Lost' )
+      .get( '/tvshows/58f93d36b64873ba88a78057' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Lost' ));
     });
 
     it( 'myRating property can be set', () => {
       request( server )
-      .post( '/tvshows/Lost' )
+      .post( '/tvshows/58f93d36b64873ba88a78057' )
       .send({ rating: '8.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 8.6' ));

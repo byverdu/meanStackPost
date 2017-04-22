@@ -8,19 +8,19 @@ module.exports = ( router, baseModel ) => {
     });
   });
 
-  router.get( '/tvshows/:title', ( req, res ) => {
-    const tvshowPage = req.params.title;
-    const promiseFindOne = baseModel.findOne({ title: `${tvshowPage}` }).exec();
+  router.get( '/tvshows/:id', ( req, res ) => {
+    const tvshowPage = req.params.id;
+    const promiseFindOne = baseModel.findOne({ _id: `${tvshowPage}` }).exec();
     promiseFindOne.then(( response ) => {
       res.send( `${response.title}` );
     });
   });
 
-  router.post( '/tvshows/:title', ( req, res ) => {
-    const tvshowPage = req.params.title;
+  router.post( '/tvshows/:id', ( req, res ) => {
+    const tvshowPage = req.params.id;
     const tvshowRating = req.body.rating;
 
-    const promiseFindOne = baseModel.findOne({ title: `${tvshowPage}` }).exec();
+    const promiseFindOne = baseModel.findOne({ _id: `${tvshowPage}` }).exec();
     promiseFindOne.then(( tvshow ) => {
       tvshow.setMyRating( tvshowRating );
       tvshow.save().then( result => res.send( `myRating: ${result.myRating}` ));

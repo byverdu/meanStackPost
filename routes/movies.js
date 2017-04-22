@@ -8,19 +8,19 @@ module.exports = ( router, baseModel ) => {
     });
   });
 
-  router.get( '/movies/:title', ( req, res ) => {
-    const moviePage = req.params.title;
-    const promiseFindOne = baseModel.findOne({ title: `${moviePage}` }).exec();
+  router.get( '/movies/:id', ( req, res ) => {
+    const moviePage = req.params.id;
+    const promiseFindOne = baseModel.findOne({ _id: `${moviePage}` }).exec();
     promiseFindOne.then(( response ) => {
       res.send( `${response.title}` );
     });
   });
 
-  router.post( '/movies/:title', ( req, res ) => {
-    const moviePage = req.params.title;
+  router.post( '/movies/:id', ( req, res ) => {
+    const moviePage = req.params.id;
     const movieRating = req.body.rating;
 
-    const promiseFindOne = baseModel.findOne({ title: `${moviePage}` }).exec();
+    const promiseFindOne = baseModel.findOne({ _id: `${moviePage}` }).exec();
     promiseFindOne.then(( movie ) => {
       movie.setMyRating( movieRating );
       movie.save().then( result => res.send( `myRating: ${result.myRating}` ));
