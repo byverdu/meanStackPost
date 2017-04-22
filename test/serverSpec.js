@@ -13,6 +13,7 @@ import sampleData from './sampleData';
 
 const expect = chai.expect;
 let movieId;
+let tvshowId;
 const {
   movieDataConverted,
   tvShowDataConverted
@@ -20,9 +21,12 @@ const {
 
 before(() => {
   const movie = new Movie({ title: 'CasaBlanca' });
+  const tvshow = new TVShow({ title: 'Castle' });
   movie.save();
-  BaseModel.findOne({ title: 'CasaBlanca' }).then(( response ) => {
-    movieId = response._id;
+  tvshow.save();
+  BaseModel.find().then(( response ) => {
+    movieId = response.find( item => item.title === 'CasaBlanca' )._id;
+    tvshowId = response.find( item => item.title === 'Castle' )._id;
   });
 });
 
@@ -91,6 +95,13 @@ describe( 'Routing test cases', () => {
       .send({ rating: '8.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 8.6' ));
+    });
+
+    it( 'a tvShow can be deleted', () => {
+      request( server )
+      .delete( `/tvshows/${tvshowId}` )
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'Castle has been deleted' ));
     });
   });
 
