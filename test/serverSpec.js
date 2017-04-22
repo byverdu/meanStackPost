@@ -12,6 +12,7 @@ import server from '../server';
 import sampleData from './sampleData';
 
 const expect = chai.expect;
+let movieId;
 const {
   movieDataConverted,
   tvShowDataConverted
@@ -19,14 +20,14 @@ const {
 
 before(() => {
   const movie = new Movie({ title: 'CasaBlanca' });
-  // movie.save();
+  movie.save();
   BaseModel.findOne({ title: 'CasaBlanca' }).then(( response ) => {
-    console.log(response);
+    movieId = response._id;
   });
 });
 
 after(() => {
-  BaseModel.remove({ title: 'CasaBlanca' }).exec();
+  BaseModel.remove({ _id: `${movieId}` }).exec();
 });
 
 describe( 'Routing test cases', () => {
@@ -49,17 +50,24 @@ describe( 'Routing test cases', () => {
 
     it( 'A page per movie should be displayed', () => {
       request( server )
-      .get( '/movies/58f93c39d4fe95ba0c16ddf2' )
+      .get( '/movies/58faa4dfb131c3f8c49cb3b0' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Rambo' ));
     });
 
     it( 'myRating property can be set', () => {
       request( server )
-      .post( '/movies/58f93c39d4fe95ba0c16ddf2' )
+      .post( '/movies/58faa4dfb131c3f8c49cb3b0' )
       .send({ rating: '5.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 5.6' ));
+    });
+
+    it( 'a movie can be deleted', () => {
+      request( server )
+      .delete( `/movies/${movieId}` )
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'CasaBlanca has been deleted' ));
     });
   });
 
@@ -72,14 +80,14 @@ describe( 'Routing test cases', () => {
     });
     it( 'A page per tvShow should be displayed', () => {
       request( server )
-      .get( '/tvshows/58f93d36b64873ba88a78057' )
+      .get( '/tvshows/58faa5d86d36baf8f226535d' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Lost' ));
     });
 
     it( 'myRating property can be set', () => {
       request( server )
-      .post( '/tvshows/58f93d36b64873ba88a78057' )
+      .post( '/tvshows/58faa5d86d36baf8f226535d' )
       .send({ rating: '8.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 8.6' ));
