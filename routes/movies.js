@@ -36,4 +36,14 @@ module.exports = ( router, baseModel ) => {
       res.send( `${movie.title} has been deleted` );
     });
   });
+
+  router.delete( '/movies', ( req, res ) => {
+    const deleteId = req.body.id;
+    const promiseFindOne = baseModel.findOne({ _id: `${deleteId}` }).exec();
+
+    promiseFindOne.then(( movie ) => {
+      baseModel.remove({ _id: `${deleteId}` }).exec();
+      res.send( `${movie.title} has been deleted` );
+    });
+  });
 };
