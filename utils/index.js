@@ -1,3 +1,7 @@
+// utils file
+
+import mongoose from 'mongoose';
+
 const splitString = str => str.split( ',' ).map( item => item.trim());
 
 const toNumber = ( str ) => {
@@ -9,6 +13,13 @@ const toNumber = ( str ) => {
 };
 
 exports.util = {
+
+  DBDisconnect: () => {
+    mongoose.connection.close(() => {
+      console.log( 'Mongoose default connection disconnected through app termination' );
+      process.exit( 0 );
+    });
+  },
 
   objectToSave: ( imdbData ) => {
     const imdbKeys = Object.keys( imdbData );
