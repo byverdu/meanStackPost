@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies*/
 // Test cases for Mongo Schemas
 
-import chai from 'chai';
+import { expect } from 'chai';
 import mongoose from 'mongoose';
 import { BaseModel, BaseSchema } from '../API/models/BaseSchema';
 import Movie from '../API/models/MovieSchema';
@@ -11,7 +11,6 @@ import sampleData from './sampleData';
 
 require( '../API/db' )();
 
-const expect = chai.expect;
 let movie;
 let tvShow;
 let baseModel;
@@ -130,8 +129,8 @@ describe( 'Schema test cases', () => {
       setTimeout(() => {
         const newMovieImdb = new TVShow({ title: 'Silicon Valley' });
         newMovieImdb.save();
-        BaseModel.remove({ title: 'Silicon Valley' }).exec();
-        BaseModel.findOne({ title: 'Silicon Valley' }).then(( response ) => {
+        BaseModel.remove({ title: 'How I met your mother' }).exec();
+        BaseModel.findOne({ title: 'How I met your mother' }).then(( response ) => {
           expect( response ).to.eql( null );
         });
       }, 3000 );

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies*/
 // Test cases for routing
 
-import chai from 'chai';
+import { expect } from 'chai';
 import request from 'supertest';
 
 
@@ -11,14 +11,13 @@ import TVShow from '../API/models/ShowSchema';
 import server from '../server';
 import sampleData from './sampleData';
 
-const expect = chai.expect;
 let movieId;
 let tvshowId;
 let movieId2;
 let tvshowId2;
 const {
-  movieDataConverted,
-  tvShowDataConverted
+  sampleMovie,
+  sampleTvshow
 } = sampleData;
 
 before(() => {
@@ -51,7 +50,7 @@ describe( 'Routing test cases', () => {
       request( server )
       .get( '/' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'Up and running' ));
+      .then( response => expect( response.text ).to.equal( 'Welcome to ImdbApp' ));
     });
   });
 
@@ -136,21 +135,24 @@ describe( 'Routing test cases', () => {
     it( 'Adding a new movie', () => {
       request( server )
       .post( '/' )
-      .send({ type: 'movie', movie: movieDataConverted })
+      .send({ type: 'movie', data: sampleMovie })
       .expect( 200 )
       .then(( response ) => {
-        expect( response.text ).to.equal( 'Star Wars: Episode IV - A New Hope' );
+        const data = Object.keys( response.body[ 1 ]);
+        expect( response.body[ 0 ]).to.equal( 'Star Wars: Episode IV - A New Hope' );
+        expect( data ).to.have.length( 7 );
         BaseModel.remove({ title: 'Star Wars: Episode IV - A New Hope' }).exec();
-      }
-      );
+      });
     });
     it( 'Adding a new tvShow', () => {
       request( server )
       .post( '/' )
-      .send({ type: 'tvshow', tvshow: tvShowDataConverted })
+      .send({ type: 'tvshow', data: sampleTvshow })
       .expect( 200 )
       .then(( response ) => {
-        expect( response.text ).to.equal( 'My Wife and Kids' );
+        const data = Object.keys( response.body[ 1 ]);
+        expect( response.body[ 0 ]).to.equal( 'My Wife and Kids' );
+        expect( data ).to.contains( 'seasons' );
         BaseModel.remove({ title: 'My Wife and Kids' }).exec();
       }
       );

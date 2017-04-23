@@ -1,11 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies*/
 // Test cases for helper utility
 
-import chai from 'chai';
+import { expect } from 'chai';
 import { util } from '../utils/index';
 import sampleData from './sampleData';
 
-const expect = chai.expect;
 const {
   sampleMovie,
   movieDataConverted,
