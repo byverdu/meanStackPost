@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies*/
 // Test cases for routing
 
-import chai from 'chai';
+import { expect } from 'chai';
 import request from 'supertest';
 
 
@@ -11,27 +11,37 @@ import TVShow from '../API/models/ShowSchema';
 import server from '../server';
 import sampleData from './sampleData';
 
-const expect = chai.expect;
 let movieId;
 let tvshowId;
+let movieId2;
+let tvshowId2;
 const {
-  movieDataConverted,
-  tvShowDataConverted
+  sampleMovie,
+  sampleTvshow
 } = sampleData;
 
 before(() => {
   const movie = new Movie({ title: 'CasaBlanca' });
   const tvshow = new TVShow({ title: 'Castle' });
+  const movie2 = new Movie({ title: 'X men' });
+  const tvshow2 = new TVShow({ title: 'Silicon Valley' });
   movie.save();
   tvshow.save();
+  movie2.save();
+  tvshow2.save();
   BaseModel.find().then(( response ) => {
     movieId = response.find( item => item.title === 'CasaBlanca' )._id;
     tvshowId = response.find( item => item.title === 'Castle' )._id;
+    movieId2 = response.find( item => item.title === 'X men' )._id;
+    tvshowId2 = response.find( item => item.title === 'Silicon Valley' )._id;
   });
 });
 
 after(() => {
   BaseModel.remove({ _id: `${movieId}` }).exec();
+  BaseModel.remove({ _id: `${tvshowId}` }).exec();
+  BaseModel.remove({ _id: `${movieId2}` }).exec();
+  BaseModel.remove({ _id: `${tvshowId2}` }).exec();
 });
 
 describe( 'Routing test cases', () => {
@@ -40,7 +50,7 @@ describe( 'Routing test cases', () => {
       request( server )
       .get( '/' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'Up and running' ));
+      .then( response => expect( response.text ).to.equal( 'Welcome to ImdbApp' ));
     });
   });
 
@@ -67,11 +77,19 @@ describe( 'Routing test cases', () => {
       .then( response => expect( response.text ).to.equal( 'myRating: 5.6' ));
     });
 
-    it( 'a movie can be deleted', () => {
+    it( 'a movie can be deleted from it\'s page', () => {
       request( server )
       .delete( `/movies/${movieId}` )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'CasaBlanca has been deleted' ));
+    });
+
+    it( 'a movie can be deleted from the main movies page', () => {
+      request( server )
+      .delete( '/movies' )
+      .send({ id: movieId2 })
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'X men has been deleted' ));
     });
   });
 
@@ -97,11 +115,19 @@ describe( 'Routing test cases', () => {
       .then( response => expect( response.text ).to.equal( 'myRating: 8.6' ));
     });
 
-    it( 'a tvShow can be deleted', () => {
+    it( 'a tvShow can be deleted from it\'s page', () => {
       request( server )
       .delete( `/tvshows/${tvshowId}` )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Castle has been deleted' ));
+    });
+
+    it( 'a tvShow can be deleted from the main tvShows page', () => {
+      request( server )
+      .delete( '/tvshows' )
+      .send({ id: tvshowId2 })
+      .expect( 200 )
+      .then( response => expect( response.text ).to.equal( 'Silicon Valley has been deleted' ));
     });
   });
 
@@ -109,21 +135,24 @@ describe( 'Routing test cases', () => {
     it( 'Adding a new movie', () => {
       request( server )
       .post( '/' )
-      .send({ type: 'movie', movie: movieDataConverted })
+      .send({ type: 'movie', data: sampleMovie })
       .expect( 200 )
       .then(( response ) => {
-        expect( response.text ).to.equal( 'Star Wars: Episode IV - A New Hope' );
+        const data = Object.keys( response.body[ 1 ]);
+        expect( response.body[ 0 ]).to.equal( 'Star Wars: Episode IV - A New Hope' );
+        expect( data ).to.have.length( 7 );
         BaseModel.remove({ title: 'Star Wars: Episode IV - A New Hope' }).exec();
-      }
-      );
+      });
     });
     it( 'Adding a new tvShow', () => {
       request( server )
       .post( '/' )
-      .send({ type: 'tvshow', tvshow: tvShowDataConverted })
+      .send({ type: 'tvshow', data: sampleTvshow })
       .expect( 200 )
       .then(( response ) => {
-        expect( response.text ).to.equal( 'My Wife and Kids' );
+        const data = Object.keys( response.body[ 1 ]);
+        expect( response.body[ 0 ]).to.equal( 'My Wife and Kids' );
+        expect( data ).to.contains( 'seasons' );
         BaseModel.remove({ title: 'My Wife and Kids' }).exec();
       }
       );
