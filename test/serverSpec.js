@@ -64,14 +64,14 @@ describe( 'Routing test cases', () => {
 
     it( 'A page per movie should be displayed', () => {
       request( server )
-      .get( '/movies/58faa4dfb131c3f8c49cb3b0' )
+      .get( '/movies/58fd4480c720743968b52631' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Rambo' ));
     });
 
     it( 'myRating property can be set', () => {
       request( server )
-      .post( '/movies/58faa4dfb131c3f8c49cb3b0' )
+      .post( '/movies/58fd4480c720743968b52631' )
       .send({ rating: '5.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 5.6' ));
@@ -102,14 +102,14 @@ describe( 'Routing test cases', () => {
     });
     it( 'A page per tvShow should be displayed', () => {
       request( server )
-      .get( '/tvshows/58faa5d86d36baf8f226535d' )
+      .get( '/tvshows/58fd43f70eab2a3931f01d62' )
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'Lost' ));
     });
 
     it( 'myRating property can be set', () => {
       request( server )
-      .post( '/tvshows/58faa5d86d36baf8f226535d' )
+      .post( '/tvshows/58fd43f70eab2a3931f01d62' )
       .send({ rating: '8.6' })
       .expect( 200 )
       .then( response => expect( response.text ).to.equal( 'myRating: 8.6' ));
