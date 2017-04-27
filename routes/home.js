@@ -3,7 +3,7 @@
 import { util } from '../utils';
 
 module.exports = ( router, MovieModel, TVShowModel ) => {
-  router.get( '/', ( req, res ) => res.send( 'Welcome to ImdbApp' ));
+  router.get( '/', ( req, res ) => res.render( 'index', { title: 'Welcome to ImdbApp' }));
 
   router.post( '/', ( req, res ) => {
     const newItem = util.objectToSave( req.body.data );

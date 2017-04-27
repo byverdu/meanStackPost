@@ -1,4 +1,5 @@
 import Express from 'express';
+import path from 'path';
 import { util } from './utils';
 
 const bodyParser = require( 'body-parser' );
@@ -11,6 +12,10 @@ if ( process.env.NODE_ENV !== 'test' ) {
 
 const app = Express();
 
+app.set( 'views', './client/views' );
+app.set( 'view engine', 'pug' );
+
+app.use( Express.static( path.join( __dirname, '/client' )));
 app.use( bodyParser.json());
 app.use( '/', allRoutes );
 app.use( notFoundRoute );

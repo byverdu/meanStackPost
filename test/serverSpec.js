@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies*/
+/* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
 // Test cases for routing
 
 import { expect } from 'chai';
@@ -50,7 +50,7 @@ describe( 'Routing test cases', () => {
       request( server )
       .get( '/' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'Welcome to ImdbApp' ));
+      .then( response => expect( response.text ).to.include( 'Welcome to ImdbApp' ));
     });
   });
 
