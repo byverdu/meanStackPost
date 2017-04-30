@@ -3,13 +3,13 @@
 
 import { expect } from 'chai';
 import mongoose from 'mongoose';
-import { BaseModel, BaseSchema } from '../API/models/BaseSchema';
-import Movie from '../API/models/MovieSchema';
-import TVShow from '../API/models/ShowSchema';
+import { BaseModel, BaseSchema } from '../server/models/BaseSchema';
+import Movie from '../server/models/MovieSchema';
+import TVShow from '../server/models/ShowSchema';
 import { util } from '../utils';
 import sampleData from './sampleData';
 
-require( '../API/db' )();
+require( '../server/db' )();
 
 let movie;
 let tvShow;

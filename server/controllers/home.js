@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
+import { includeModule } from '../../conf';
 
-const utils = include_module( 'utils' );
-const MovieModel = include_module( 'server/models/MovieSchema' );
-const TVShowModel = include_module( 'server/models/ShowSchema' );
+const utils = includeModule( 'utils' );
+const MovieModel = includeModule( 'server/models/MovieSchema' );
+const TVShowModel = includeModule( 'server/models/ShowSchema' );
 
 const homeGet = ( req, res ) => res.render( 'index', { title: 'Welcome to ImdbApp' });
 

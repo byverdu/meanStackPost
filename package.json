@@ -2,11 +2,11 @@
   "name": "mean-stack-tutorial",
   "version": "1.0.0",
   "description": "imdb application to explain how mean stack works",
-  "main": "index.js",
+  "main": "./bin/www",
   "scripts": {
     "test": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register\" test",
-    "nodemon": "nodemon --exec  babel-node  server.js",
-    "start": "babel-node  server.js"
+    "nodemon": "nodemon --exec  babel-node  ./bin/www",
+    "start": "babel-node  ./bin/www"
   },
   "repository": {
     "type": "git",

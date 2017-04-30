@@ -1,19 +1,14 @@
 import Express from 'express';
 import pathUtil from 'path';
-import { util } from './utils';
+import { util } from '../utils';
 
-// setup for global path
-global.include_module = ( path ) => {
-  const pathModule = pathUtil.join( __dirname, `${path}` );
-  return require( pathModule );
-};
 
 const bodyParser = require( 'body-parser' );
-const allRoutes = require( './server/routes/' );
-const notFoundRoute = require( './server/routes/404' );
+const allRoutes = require( './routes/' );
+const notFoundRoute = require( './routes/404' );
 
 if ( process.env.NODE_ENV !== 'test' ) {
-  require( './server/db' )();
+  require( './db' )();
 }
 
 const app = Express();
@@ -26,9 +21,6 @@ app.use( bodyParser.json());
 app.use( '/', allRoutes );
 app.use( notFoundRoute );
 
-app.listen( 3000, () => {
-  console.log( 'App listening to port 3000' );
-});
-
 process.on( 'SIGINT', util.DBDisconnect ).on( 'SIGTERM', util.DBDisconnect );
+
 module.exports = app;
