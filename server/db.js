@@ -1,6 +1,8 @@
 // mongodb connection
-const uriUtil = require( 'mongodb-uri' );
-const mongoose = require( 'mongoose' );
+
+import uriUtil from 'mongodb-uri';
+import mongoose from 'mongoose';
+import { dbDevelopment, dbTest } from '../conf';
 
 module.exports = function () {
   const options = {
@@ -20,11 +22,11 @@ module.exports = function () {
   let dbURL;
 
   if ( process.env.NODE_ENV === 'development' ) {
-    dbURL = 'mongodb://localhost/imdbApp';
+    dbURL = dbDevelopment;
   }
 
   if ( process.env.NODE_ENV === 'test' ) {
-    dbURL = 'mongodb://localhost/imdbAppTest';
+    dbURL = dbTest;
   }
 
   if ( process.env.NODE_ENV === 'production' ) {
