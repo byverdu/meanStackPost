@@ -1,3 +1,3 @@
 window.addEventListener( 'DOMContentLoaded', () => {
-  window.alert();
+  console.log('patata de la wena');
 });

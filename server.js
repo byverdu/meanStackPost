@@ -1,13 +1,19 @@
 import Express from 'express';
-import path from 'path';
+import pathUtil from 'path';
 import { util } from './utils';
 
+// setup for global path
+global.include_module = ( path ) => {
+  const pathModule = pathUtil.join( __dirname, `${path}` );
+  return require( pathModule );
+};
+
 const bodyParser = require( 'body-parser' );
-const allRoutes = require( './routes/allRoutes' );
-const notFoundRoute = require( './routes/404' );
+const allRoutes = require( './server/routes/' );
+const notFoundRoute = require( './server/routes/404' );
 
 if ( process.env.NODE_ENV !== 'test' ) {
-  require( './API/db' )();
+  require( './server/db' )();
 }
 
 const app = Express();
@@ -15,7 +21,7 @@ const app = Express();
 app.set( 'views', './client/views' );
 app.set( 'view engine', 'pug' );
 
-app.use( Express.static( path.join( __dirname, '/client' )));
+app.use( Express.static( pathUtil.join( __dirname, '/client' )));
 app.use( bodyParser.json());
 app.use( '/', allRoutes );
 app.use( notFoundRoute );
