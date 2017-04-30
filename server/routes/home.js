@@ -1,8 +1,8 @@
 // home
-import { homeGet, homePost } from '../controllers/home';
+import { getHome, postHome } from '../controllers/home';
 
 module.exports = ( router ) => {
-  router.get( '/', homeGet );
-  router.post( '/', homePost );
+  router.get( '/', getHome );
+  router.post( '/', postHome );
   return router;
 };

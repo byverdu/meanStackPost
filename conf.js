@@ -7,6 +7,8 @@ module.exports = {
     return require( pathModule );
   },
 
+  rootPath: __dirname,
+
   dbDevelopment: 'mongodb://localhost/imdbApp',
 
   dbTest: 'mongodb://localhost/imdbAppTest'

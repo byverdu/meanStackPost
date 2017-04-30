@@ -5,9 +5,9 @@ const utils = includeModule( 'utils' );
 const MovieModel = includeModule( 'server/models/MovieSchema' );
 const TVShowModel = includeModule( 'server/models/ShowSchema' );
 
-const homeGet = ( req, res ) => res.render( 'index', { title: 'Welcome to ImdbApp' });
+const getHome = ( req, res ) => res.render( 'index', { title: 'Welcome to ImdbApp' });
 
-const homePost = ( req, res ) => {
+const postHome = ( req, res ) => {
   const newItem = utils.objectToSave( req.body.data );
   if ( req.body.type === 'movie' ) {
     const newMovie = new MovieModel( newItem );
@@ -20,6 +20,6 @@ const homePost = ( req, res ) => {
 };
 
 export {
-  homeGet,
-  homePost
+  getHome,
+  postHome
 };
