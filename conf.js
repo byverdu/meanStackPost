@@ -1,15 +1,21 @@
 import pathUtil from 'path';
 
 // setup for global path
-module.exports = {
-  includeModule: ( path ) => {
-    const pathModule = pathUtil.join( __dirname, `${path}` );
-    return require( pathModule );
-  },
+const includeModule = ( path ) => {
+  const pathModule = pathUtil.join( __dirname, `${path}` );
+  return require( pathModule );
+};
 
-  rootPath: __dirname,
+const rootPath = __dirname;
 
-  dbDevelopment: 'mongodb://localhost/imdbApp',
+const dbDevelopment = 'mongodb://localhost/imdbApp';
 
-  dbTest: 'mongodb://localhost/imdbAppTest'
+const dbTest = 'mongodb://localhost/imdbAppTest';
+
+
+export {
+  includeModule,
+  rootPath,
+  dbDevelopment,
+  dbTest
 };

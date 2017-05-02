@@ -12,36 +12,38 @@ const toNumber = ( str ) => {
   return isNumber;
 };
 
-exports.util = {
+const objectToSave = ( imdbData ) => {
+  const imdbKeys = Object.keys( imdbData );
+  const props = [
+    'title', 'poster', 'rating', 'year', 'imdburl', 'genres', 'actors'
+  ];
+  const tempObj = {};
 
-  DBDisconnect: () => {
-    mongoose.connection.close(() => {
-      console.log( 'Mongoose default connection disconnected through app termination' );
-      process.exit( 0 );
-    });
-  },
+  imdbKeys.forEach(( key ) => {
+    if ( props.indexOf( key ) >= 0 ) {
+      tempObj[ key ] = imdbData[ key ];
 
-  objectToSave: ( imdbData ) => {
-    const imdbKeys = Object.keys( imdbData );
-    const props = [
-      'title', 'poster', 'rating', 'year', 'imdburl', 'genres', 'actors'
-    ];
-    const tempObj = {};
-
-    imdbKeys.forEach(( key ) => {
-      if ( props.indexOf( key ) >= 0 ) {
-        tempObj[ key ] = imdbData[ key ];
-
-        // Convert genres and actors into arrays
-        if ( key === 'genres' || key === 'actors' ) {
-          tempObj[ key ] = splitString( imdbData[ key ]);
-        }
-        // add number seasons prop for tvshows
-        if ( imdbData.series ) {
-          tempObj.seasons = imdbData.totalseasons;
-        }
+      // Convert genres and actors into arrays
+      if ( key === 'genres' || key === 'actors' ) {
+        tempObj[ key ] = splitString( imdbData[ key ]);
       }
-    });
-    return tempObj;
-  }
+      // add number seasons prop for tvshows
+      if ( imdbData.series ) {
+        tempObj.seasons = imdbData.totalseasons;
+      }
+    }
+  });
+  return tempObj;
+};
+
+const DBDisconnect = () => {
+  mongoose.connection.close(() => {
+    console.log( 'Mongoose default connection disconnected through app termination' );
+    process.exit( 0 );
+  });
+};
+
+export {
+  objectToSave,
+  DBDisconnect
 };

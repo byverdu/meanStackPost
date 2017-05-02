@@ -1,11 +1,10 @@
 import Express from 'express';
 import pathUtil from 'path';
-import { util } from '../utils';
+import { DBDisconnect } from '../utils';
 import { rootPath } from '../conf';
 
-
 const bodyParser = require( 'body-parser' );
-const allRoutes = require( './routes/' );
+const allRoutes = require( './routes' );
 const notFoundRoute = require( './routes/404' );
 
 
@@ -23,6 +22,6 @@ app.use( bodyParser.json());
 app.use( '/', allRoutes );
 app.use( notFoundRoute );
 
-process.on( 'SIGINT', util.DBDisconnect ).on( 'SIGTERM', util.DBDisconnect );
+process.on( 'SIGINT', DBDisconnect ).on( 'SIGTERM', DBDisconnect );
 
 module.exports = app;
