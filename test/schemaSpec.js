@@ -9,8 +9,6 @@ import TVShow from '../server/models/ShowSchema';
 import { objectToSave } from '../utils';
 import sampleData from './sampleData';
 
-require( '../server/db' )();
-
 let movie;
 let tvShow;
 let baseModel;

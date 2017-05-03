@@ -29,12 +29,10 @@ before(() => {
   tvshow.save();
   movie2.save();
   tvshow2.save();
-  BaseModel.find().then(( response ) => {
-    movieId = response.find( item => item.title === 'CasaBlanca' )._id;
-    tvshowId = response.find( item => item.title === 'Castle' )._id;
-    movieId2 = response.find( item => item.title === 'X men' )._id;
-    tvshowId2 = response.find( item => item.title === 'Silicon Valley' )._id;
-  });
+  movieId = movie._id;
+  tvshowId = tvshow._id;
+  movieId2 = movie2._id;
+  tvshowId2 = tvshow2._id;
 });
 
 after(() => {

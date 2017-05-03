@@ -3,8 +3,6 @@ import MovieModel from '../models/MovieSchema';
 import TVShowModel from '../models/ShowSchema';
 import { includeModule } from '../../conf';
 
-console.log( includeModule);
-
 const utils = includeModule( 'utils' );
 
 const getHome = ( req, res ) => res.render( 'index', { title: 'Welcome to ImdbApp' });
