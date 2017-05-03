@@ -1,26 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies*/
 import gulp from 'gulp';
-import mocha from 'gulp-mocha';
 
-const mochaOpts = {
-  ui: 'tdd',
-  require: ['./server/db'],
-  compilers: 'js:babel-core/register'
-};
+require( 'require-dir' )( './build/tasks' );
 
-gulp.task( 'exec', () => {
-  process.env.NODE_ENV = 'test';
-});
-
-gulp.task( 'test-runner', ['exec'], () => {
-  gulp.src( './test/*Spec.js' )
-  .pipe( mocha( mochaOpts ));
-});
-
-gulp.task( 'tdd', () => {
-  gulp.watch(['server/**/*.js', 'test/*.js'], ['test-runner']);
-});
-
-gulp.task( 'default', ['test-runner', 'tdd'], () => {
+gulp.task( 'default', ['test-runner', 'watch'], () => {
   console.log( 'Gulp task complete' );
 });
