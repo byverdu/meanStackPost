@@ -11,14 +11,17 @@ const browserOpts = {
   open: false
 };
 
-gulp.task( 'browserSync', () => {
+gulp.task( 'browserSync', ['browserify'], () => {
   let restarted = false;
 
   browserSync.create();
   browserSync.init( browserOpts );
 
   return nodemon({
-    exec: 'nodemon --exec  babel-node  ./bin/www'
+    exec: 'babel-node  ./bin/www',
+    ext: 'pug js',
+    tasks: ['browserify'],
+    ignore: ['./client/static']
   })
     .on( 'start', () => {
       if ( restarted ) {

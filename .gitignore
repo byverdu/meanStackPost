@@ -1,1 +1,3 @@
 node_modules
+client/static/bundle.js
+client/static/bundle.js.map

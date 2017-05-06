@@ -1,3 +1,7 @@
-window.addEventListener( 'DOMContentLoaded', () => {
-  console.log('patata de la wena');
-});
+import angular from 'angular';
+
+angular.module( 'imdbApp', [])
+  .controller( 'HomeController', function () {
+    this.test = 'patatatatatata';
+  });
+
