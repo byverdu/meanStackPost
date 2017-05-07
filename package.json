@@ -38,6 +38,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-mocha": "^4.9.0",
     "eslint-plugin-react": "^6.10.3",
+    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.2",
     "gulp-mocha": "^4.3.1",

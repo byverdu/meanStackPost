@@ -3,6 +3,6 @@ import gulp from 'gulp';
 
 require( 'require-dir' )( './build/tasks' );
 
-gulp.task( 'default', ['test-runner', 'watch'], () => {
+gulp.task( 'default', ['browserSync', 'test-runner', 'watch'], () => {
   console.log( 'Gulp task complete' );
 });
