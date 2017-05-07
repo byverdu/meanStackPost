@@ -2,8 +2,8 @@
 // Test cases for helper utility
 
 import { expect } from 'chai';
-import { objectToSave } from '../utils/index';
-import sampleData from './sampleData';
+import { objectToSave } from '../../utils/index';
+import sampleData from '../sampleData';
 
 const {
   sampleMovie,

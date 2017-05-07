@@ -15,6 +15,6 @@ gulp.task( 'exec', () => {
 });
 
 gulp.task( 'test-runner', ['exec'], () => {
-  gulp.src( paths.srcTest )
+  gulp.src( paths.srcServerTest )
     .pipe( mocha( mochaOpts ));
 });

@@ -4,7 +4,8 @@
   "description": "imdb application to explain how mean stack works",
   "main": "./bin/www",
   "scripts": {
-    "test": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register\" test",
+    "server-test": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register\" test/server-test",
+    "client-test": "karma start",
     "nodemon": "nodemon --exec  babel-node  ./bin/www",
     "start": "babel-node  ./bin/www"
   },
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/byverdu/meanStackPost#readme",
   "devDependencies": {
+    "angular-mocks": "^1.6.4",
     "babel-eslint": "^7.2.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
@@ -48,12 +50,21 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^2.1.2",
     "gulp-watch": "^4.3.11",
+    "karma": "^1.7.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-browserify": "^5.1.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-mocha": "^1.3.0",
+    "karma-spec-reporter": "0.0.31",
+    "mocha": "^3.3.0",
     "require-dir": "^0.3.1",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "supertest": "^3.0.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
   },
   "dependencies": {
     "angular": "^1.6.4",

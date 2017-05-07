@@ -1,4 +1,4 @@
-import angular from 'angular';
+// import angular from 'angular';
 
 angular.module( 'imdbApp', [])
   .controller( 'HomeController', function () {

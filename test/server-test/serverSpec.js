@@ -5,11 +5,11 @@ import { expect } from 'chai';
 import request from 'supertest';
 
 
-import { BaseModel } from '../server/models/BaseSchema';
-import Movie from '../server/models/MovieSchema';
-import TVShow from '../server/models/ShowSchema';
-import server from '../server/';
-import sampleData from './sampleData';
+import { BaseModel } from '../../server/models/BaseSchema';
+import Movie from '../../server/models/MovieSchema';
+import TVShow from '../../server/models/ShowSchema';
+import server from '../../server/';
+import sampleData from '../sampleData';
 
 let movieId;
 let tvshowId;
