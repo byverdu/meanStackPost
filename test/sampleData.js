@@ -111,10 +111,9 @@ const newMovie = {
   country: 'UK',
   awards: 'Nominated for 1 Oscar. Another 20 wins & 26 nominations.',
   poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMzA5Zjc3ZTMtMmU5YS00YTMwLWI4MWUtYTU0YTVmNjVmODZhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
-  ratings:
-   [ { Source: 'Internet Movie Database', Value: '8.2/10' },
+  ratings: [{ Source: 'Internet Movie Database', Value: '8.2/10' },
      { Source: 'Rotten Tomatoes', Value: '90%' },
-     { Source: 'Metacritic', Value: '83/100' } ],
+     { Source: 'Metacritic', Value: '83/100' }],
   metascore: '83',
   rating: '8.2',
   votes: '508,382',
@@ -126,7 +125,7 @@ const newMovie = {
   website: 'http://www.miramax.com/movie/trainspotting/',
   response: 'True',
   series: false,
-  imdburl: 'https://www.imdb.com/title/tt0117951' }
+  imdburl: 'https://www.imdb.com/title/tt0117951' };
 
 const splitString = str => str.split( ',' ).map( item => item.trim());
 

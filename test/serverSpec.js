@@ -1,14 +1,14 @@
-/* eslint-disable import/no-extraneous-dependencies*/
+/* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
 // Test cases for routing
 
 import { expect } from 'chai';
 import request from 'supertest';
 
 
-import { BaseModel } from '../API/models/BaseSchema';
-import Movie from '../API/models/MovieSchema';
-import TVShow from '../API/models/ShowSchema';
-import server from '../server';
+import { BaseModel } from '../server/models/BaseSchema';
+import Movie from '../server/models/MovieSchema';
+import TVShow from '../server/models/ShowSchema';
+import server from '../server/';
 import sampleData from './sampleData';
 
 let movieId;
@@ -29,12 +29,10 @@ before(() => {
   tvshow.save();
   movie2.save();
   tvshow2.save();
-  BaseModel.find().then(( response ) => {
-    movieId = response.find( item => item.title === 'CasaBlanca' )._id;
-    tvshowId = response.find( item => item.title === 'Castle' )._id;
-    movieId2 = response.find( item => item.title === 'X men' )._id;
-    tvshowId2 = response.find( item => item.title === 'Silicon Valley' )._id;
-  });
+  movieId = movie._id;
+  tvshowId = tvshow._id;
+  movieId2 = movie2._id;
+  tvshowId2 = tvshow2._id;
 });
 
 after(() => {
@@ -50,7 +48,7 @@ describe( 'Routing test cases', () => {
       request( server )
       .get( '/' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.equal( 'Welcome to ImdbApp' ));
+      .then( response => expect( response.text ).to.include( 'Welcome to ImdbApp' ));
     });
   });
 

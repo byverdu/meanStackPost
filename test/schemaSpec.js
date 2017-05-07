@@ -3,13 +3,11 @@
 
 import { expect } from 'chai';
 import mongoose from 'mongoose';
-import { BaseModel, BaseSchema } from '../API/models/BaseSchema';
-import Movie from '../API/models/MovieSchema';
-import TVShow from '../API/models/ShowSchema';
-import { util } from '../utils';
+import { BaseModel, BaseSchema } from '../server/models/BaseSchema';
+import Movie from '../server/models/MovieSchema';
+import TVShow from '../server/models/ShowSchema';
+import { objectToSave } from '../utils';
 import sampleData from './sampleData';
-
-require( '../API/db' )();
 
 let movie;
 let tvShow;
@@ -96,7 +94,7 @@ describe( 'Schema test cases', () => {
   });
   describe( 'Saving and deleting documents for movie or tvShow', () => {
     it( 'A new movie can be saved to db', () => {
-      const trainspotting = util.objectToSave( newMovie );
+      const trainspotting = objectToSave( newMovie );
       const newMovieImdb = new Movie( trainspotting );
       newMovieImdb.save().then(() => {
         BaseModel.find({ __t: 'Movie' }).then(( response ) => {
@@ -116,7 +114,7 @@ describe( 'Schema test cases', () => {
       }, 2000 );
     });
     it( 'A new tvShow can be saved to db', () => {
-      const wifeKids = util.objectToSave( sampleTvshow );
+      const wifeKids = objectToSave( sampleTvshow );
       const newTvshow = new TVShow( wifeKids );
       newTvshow.save().then(() => {
         BaseModel.find({ __t: 'TVShow' }).then(( response ) => {
