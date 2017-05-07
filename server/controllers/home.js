@@ -5,7 +5,7 @@ import { includeModule } from '../../conf';
 
 const utils = includeModule( 'utils' );
 
-const getHome = ( req, res ) => res.render( 'index', { title: 'Welcome to ImdbApp' });
+const getHome = ( req, res ) => res.render( 'index' );
 
 const postHome = ( req, res ) => {
   const newItem = utils.objectToSave( req.body.data );

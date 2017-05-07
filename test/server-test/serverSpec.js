@@ -48,7 +48,7 @@ describe( 'Routing test cases', () => {
       request( server )
       .get( '/' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.include( 'Welcome to ImdbApp' ));
+      .then( response => expect( response.text ).to.include( 'Awesome Imdb' ));
     });
   });
 

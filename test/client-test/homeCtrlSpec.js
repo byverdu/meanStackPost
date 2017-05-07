@@ -1,18 +1,25 @@
 /* global inject, expect */
 
-describe( 'HomeController', () => {
+describe( 'imdbApp Home Page', () => {
   beforeEach( module( 'imdbApp' ));
   let $controller;
-  let $scope;
 
-  beforeEach( inject( function ( _$rootScope_, _$controller_ ) {
-    $scope = _$rootScope_.$new();
-    $controller = _$controller_( 'HomeController', { $scope });
+  beforeEach( inject(( _$controller_ ) => {
+    $controller = _$controller_( 'HomeController' );
   }));
 
   describe( 'HomeController', () => {
     it( 'is defined', () => {
       expect( $controller ).not.eq( undefined );
+    });
+    it( '$scope has a title property', () => {
+      expect( $controller.title ).to.equal( 'Welcome to ImdbApp' );
+    });
+    it( '$scope has a imdbText property', () => {
+      expect( $controller.imdbText ).to.equal( '' );
+    });
+    it( 'a movie can be search to Imdb', () => {
+      expect( $controller.callImdbApi ).to.be.a( 'Function' );
     });
   });
 });

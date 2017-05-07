@@ -16,7 +16,7 @@ module.exports = ( config ) => {
     files: [
       'node_modules/angular/angular.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'client/static/*.js',
+      'client/static/bundle.js',
       'test/client-test/*Spec.js'
     ],
 
