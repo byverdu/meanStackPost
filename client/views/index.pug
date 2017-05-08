@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-html(lang="en")
+html(lang="en", ng-app="imdbApp")
 head
   meta(charset="UTF-8")
   meta(name="viewport", content="width=device-width, initial-scale=1.0")
   meta(http-equiv="X-UA-Compatible", content="ie=edge")
   link(rel="stylesheet", type="text/css", href="static/styles.css")
   title Awesome Imdb 
-body(ng-app="imdbApp")
+body
   .wrapper(ng-controller="HomeController as home")
-    h1 #{title}
-    h3 {{home.test}}
+    h1(ng-bind="home.title")
+
+    form.searchImdb(ng-submit="home.callImdbApi()")
+      fieldset
+        label Search on Imdb
+          input(type="text", placeholder="type name film", ng-model="home.imdbText")
+        input(type="submit", value="Search")
+    
+    .latestItem(ng-show="home.imdbData.title !== undefined")
+      h3 {{home.imdbData.title}}
   script(type="application/javascript", src="static/bundle.js")
   

@@ -18,7 +18,10 @@ describe( 'imdbApp Home Page', () => {
     it( '$scope has a imdbText property', () => {
       expect( $controller.imdbText ).to.equal( '' );
     });
-    it( 'a movie can be search to Imdb', () => {
+    it( '$scope has a imdbData property', () => {
+      expect( $controller.imdbData ).to.be.an( 'object' );
+    });
+    it( 'callImdbApi will call to Imdb API', () => {
       expect( $controller.callImdbApi ).to.be.a( 'Function' );
     });
   });
