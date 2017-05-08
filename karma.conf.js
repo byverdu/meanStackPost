@@ -9,7 +9,7 @@ module.exports = ( config ) => {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'mocha', 'chai'],
+    frameworks: ['browserify', 'mocha', 'chai', 'sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -45,7 +45,8 @@ module.exports = ( config ) => {
       'karma-chai',
       'karma-spec-reporter',
       'karma-chrome-launcher',
-      'karma-babel-preprocessor'],
+      'karma-babel-preprocessor',
+      'karma-sinon'],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

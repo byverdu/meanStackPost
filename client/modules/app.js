@@ -1,29 +1,23 @@
 import angular from 'angular';
 
-const imdbService = require( './imdbService.js' );
+const imdbService = require( './imdbService' );
+const imdbBroadcaster = require( './imdbBroadcaster' );
 
 angular.module( 'imdbApp', [])
-  .factory( 'imdbListener', ['$rootScope', function ( $rootScope ) {
-    const abc = {};
-    abc.itemAdded = function ( item ) {
-      console.log(item, 'imdbService.js')
-      $rootScope.$emit( 'item:added', item );
-    };
-    return abc;
-  }])
   .service( 'imdbService', imdbService )
-  .controller( 'HomeController', ['imdbService', 'imdbListener', '$rootScope', '$timeout', function ( service, imdbListener, $rootScope, $timeout ) {
+  .factory( 'imdbBroadcaster', ['$rootScope', imdbBroadcaster])
+  .controller( 'HomeController', ['imdbService', 'imdbBroadcaster', '$rootScope', '$timeout', function ( service, broadcaster, $rootScope, $timeout ) {
     const $home = this;
     $home.title = 'Welcome to ImdbApp';
     $home.imdbText = '';
     $home.imdbData = {};
-    $rootScope.$on( 'item:added', function ( event, item ) {
+    $rootScope.$on( 'item:searched', function ( event, item ) {
       $timeout(() => {
           $home.imdbData = item;
         }, 1000 );
     });
     $home.callImdbApi = function () {
       service.getImdbData( this.imdbText )
-        .then( response => imdbListener.itemAdded( response ));
+        .then( response => broadcaster.itemSearched( response ));
     };
   }]);
