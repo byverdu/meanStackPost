@@ -8,15 +8,17 @@ const imdbCard = `<div class="imdb-card">
 <ul>
 <li ng-repeat="act in data.actors">{{act}}</li>
 <ul>
+<button ng-click="saveData()">Save</button>
 </div>`;
 
 export function buildImdbCard() {
-  return {
-    restrict: 'E',
+	return {
+		restrict: 'E',
 		replace: true,
-  	template: imdbCard,
+		template: imdbCard,
 		scope: {
-			data: '<'
+			data: '<',
+			saveData: '&'
 		}
 	};
 }

@@ -7,15 +7,15 @@ const imdbBroadcaster = require( './imdbBroadcaster' );
 const homeController = require( './homeController' );
 
 const dependencies = [
-  'imdbService',
-  'imdbBroadcaster',
-  '$rootScope',
-  '$timeout',
-  homeController
+	'imdbService',
+	'imdbBroadcaster',
+	'$rootScope',
+	'$timeout',
+	homeController
 ];
 
 angular.module( 'imdbApp', [])
   .directive( 'imdbCard', buildImdbCard )
-  .service( 'imdbService', imdbService )
+  .service( 'imdbService', ['$http', imdbService])
   .factory( 'imdbBroadcaster', ['$rootScope', imdbBroadcaster])
   .controller( 'HomeController', dependencies );

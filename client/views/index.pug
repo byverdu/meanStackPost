@@ -17,6 +17,6 @@ body
         input(type="submit", value="Search")
     
     .latestItem(ng-show="home.imdbData.title !== undefined")
-      imdb-card(data="home.imdbData")
+      imdb-card(data="home.imdbData", save-data="home.saveToDb()")
   script(type="application/javascript", src="static/bundle.js")
   
