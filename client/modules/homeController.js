@@ -25,6 +25,12 @@ module.exports = function ( service, broadcaster, $rootScope, $timeout, Notifica
 
 	$home.saveToDb = function () {
 		service.postHomeData( $home.imdbData )
-			.then( response => console.log(response, 'repsoenene'))
+			.then(( response ) => {
+				if ( response.status === 200 ) {
+					Notification.success( `${response.data} ${response.config.data.type} has been saved to DB` );
+				} else {
+					Notification.error( 'Something went wrong saving on DB' );
+				}
+			});
 	};
 };
