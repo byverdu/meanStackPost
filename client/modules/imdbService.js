@@ -17,11 +17,17 @@ module.exports = function ( $http ) {
 				data,
 				type: ( isTVShow ) ? 'tvshow' : 'movie'
 			};
-			console.log( tempData, 'postHomeData' );
 			return $http({
 				method: 'POST',
 				url: './',
 				data: tempData
+			});
+		},
+
+		getAPIData( type ) {
+			return $http({
+				method: 'GET',
+				url: `./api/${type}`
 			});
 		}
 	};
