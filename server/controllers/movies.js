@@ -2,11 +2,16 @@
 
 import { BaseModel } from '../models/BaseSchema';
 
+const getAPI = ( req, res ) => {
+	const promiseFind = BaseModel.find({ __t: 'Movie' }).exec();
+	promiseFind.then(( response ) => {
+		res.type( 'json' );
+		res.json({ response });
+	});
+};
+
 const getMovies = ( req, res ) => {
-  const promiseFind = BaseModel.find({ __t: 'Movie' }).exec();
-  promiseFind.then(( response ) => {
-    res.send( `${response[ 0 ].title}` );
-  });
+	res.render( 'movies' );
 };
 
 const getMoviesId = ( req, res ) => {
@@ -53,5 +58,6 @@ export {
   getMoviesId,
   postMoviesId,
   deleteMoviesId,
-  deleteMovies
+  deleteMovies,
+  getAPI
 };
