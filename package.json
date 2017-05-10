@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "angular": "^1.6.4",
+    "angular-ui-notification": "^0.3.6",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "imdb-api": "^2.2.2",

@@ -7,7 +7,8 @@ module.exports = function ( $http ) {
 	return {
 		getImdbData( text ) {
 			return imdbApi.get( text )
-			.then( response => objectToSave( response ));
+			.then( response => objectToSave( response ))
+			.catch( error => error );
 		},
 
 		postHomeData( data ) {

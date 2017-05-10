@@ -5,10 +5,15 @@ head
   meta(name="viewport", content="width=device-width, initial-scale=1.0")
   meta(http-equiv="X-UA-Compatible", content="ie=edge")
   link(rel="stylesheet", type="text/css", href="static/styles.css")
+  link(rel="stylesheet", type="text/css", href="static/notification.css")
   title Awesome Imdb 
 body
   .wrapper(ng-controller="HomeController as home")
     h1(ng-bind="home.title")
+
+    nav
+      div(ng-repeat="link in home.links")
+        a(ng-href="{{link.url}}") {{link.text}}
 
     form.searchImdb(ng-submit="home.callImdbApi()")
       fieldset
