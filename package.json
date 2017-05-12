@@ -6,7 +6,7 @@
   "scripts": {
     "server-test": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register\" test/server-test",
     "client-test": "karma start",
-    "nodemon": "nodemon --exec  babel-node  ./bin/www",
+    "nodemon": "nodemon -e js,pug --exec babel-node  ./bin/www",
     "start": "babel-node  ./bin/www"
   },
   "repository": {
@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
     "angular-ui-notification": "^0.3.6",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",

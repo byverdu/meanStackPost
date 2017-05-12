@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-html(lang="en", ng-app="imdbApp")
-head
-  meta(charset="UTF-8")
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  meta(http-equiv="X-UA-Compatible", content="ie=edge")
-  link(rel="stylesheet", type="text/css", href="static/styles.css")
-  link(rel="stylesheet", type="text/css", href="static/notification.css")
-  title Awesome Imdb 
-body
+extends layout
+block content
+  
   .wrapper(ng-controller="HomeController as home")
     h1(ng-bind="home.title")
 
@@ -23,5 +16,4 @@ body
     
     .latestItem(ng-show="home.imdbData.title !== undefined")
       imdb-card(data="home.imdbData", save-data="home.saveToDb()")
-  script(type="application/javascript", src="static/bundle.js")
-  
+    

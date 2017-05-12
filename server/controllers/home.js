@@ -2,7 +2,7 @@
 import MovieModel from '../models/MovieSchema';
 import TVShowModel from '../models/ShowSchema';
 
-const getHome = ( req, res ) => res.render( 'index' );
+const getHome = ( req, res ) => res.render( 'layout' );
 
 const postHome = ( req, res ) => {
 	// console.log( req.body, 'req.bodyreq.body' );

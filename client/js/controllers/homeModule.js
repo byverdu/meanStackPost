@@ -1,11 +1,10 @@
 import angular from 'angular';
 
-import { buildImdbCard } from './directives';
+import { buildImdbCard } from '../services/directives';
 
-const imdbService = require( './imdbService' );
-const imdbBroadcaster = require( './imdbBroadcaster' );
+const imdbService = require( '../services/imdbService' );
+const imdbBroadcaster = require( '../services/imdbBroadcaster' );
 const homeController = require( './homeController' );
-const movieController = require( './movieController.js' );
 
 require( 'angular-ui-notification/dist/angular-ui-notification' );
 
@@ -18,9 +17,8 @@ const dependencies = [
 	homeController
 ];
 
-angular.module( 'imdbApp', ['ui-notification'])
+angular.module( 'homeModule', ['ui-notification'])
   .directive( 'imdbCard', buildImdbCard )
   .service( 'imdbService', ['$http', imdbService])
   .factory( 'imdbBroadcaster', ['$rootScope', imdbBroadcaster])
-  .controller( 'HomeController', dependencies )
-  .controller( 'MovieController', ['imdbService', movieController]);
+  .controller( 'HomeController', dependencies );

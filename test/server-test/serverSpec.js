@@ -48,7 +48,7 @@ after(() => {
 				request( server )
 				.get( '/' )
 				.expect( 200 )
-				.then( response => assert( response.text, 'Awesomse Imdb' ));
+				.then( response => assert( response.text, 'Awesome Imdb' ));
 			});
 		});
 
@@ -57,7 +57,7 @@ after(() => {
       request( server )
       .get( '/movies' )
       .expect( 200 )
-      .then( response => expect( response.text ).to.include( 'imdbMovies' ));
+      .then( response => expect( response.text ).to.include( 'Awesome Imdb' ));
     });
 
     it( 'A page per movie should be displayed', () => {

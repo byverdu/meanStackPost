@@ -1,5 +1,5 @@
 // Service to retrive data from Imdb
-import { objectToSave } from '../../utils';
+import { objectToSave } from '../../../utils';
 
 const imdbApi = require( 'imdb-api' );
 
