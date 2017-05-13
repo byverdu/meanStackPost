@@ -52,13 +52,27 @@ after(() => {
 			});
 		});
 
-  describe( 'Movies route', () => {
-    it( 'Movies route should return 200', () => {
-      request( server )
-      .get( '/movies' )
-      .expect( 200 )
-      .then( response => expect( response.text ).to.include( 'Awesome Imdb' ));
-    });
+		describe( 'Generic route for movies and tvshows', () => {
+			it( 'imdb route should return 200', () => {
+				request( server )
+				.get( '/imdb' )
+				.expect( 200 );
+			});
+			it( 'imdb route accepts params', () => {
+				request( server )
+				.get( '/imdb/movies' )
+				.expect( 200 )
+				.then( response => expect( response.text ).to.include( 'Awesome Imdb' ));
+			});
+		});
+
+	describe( 'Movies route', () => {
+		it( 'Movies route should return 200', () => {
+			request( server )
+			.get( '/movies' )
+			.expect( 200 )
+			.then( response => expect( response.text ).to.include( 'Awesome Imdb' ));
+		});
 
     it( 'A page per movie should be displayed', () => {
       request( server )

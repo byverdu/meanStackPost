@@ -2,11 +2,7 @@
 import MovieModel from '../models/MovieSchema';
 import TVShowModel from '../models/ShowSchema';
 
-const getHome = ( req, res ) => res.render( 'layout' );
-
 const postHome = ( req, res ) => {
-	// console.log( req.body, 'req.bodyreq.body' );
-
 	if ( req.body.type === 'movie' ) {
 		const newMovie = new MovieModel( req.body.data );
 		newMovie.save().then( movie => res.send( `${movie.title}` ));
@@ -18,6 +14,5 @@ const postHome = ( req, res ) => {
 };
 
 export {
-  getHome,
-  postHome
+	postHome
 };
