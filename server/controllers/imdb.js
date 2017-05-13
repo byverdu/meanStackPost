@@ -15,16 +15,28 @@ const getNameModel = ( modelType ) => {
 	return str;
 };
 
-const getAPI = ( req, res ) => {
+const getListAPI = ( req, res ) => {
 	const model = getNameModel( req.params.imdb );
 
-	const promiseFind = BaseModel.find({ __t: model }).exec();
-	promiseFind.then(( response ) => {
-		res.type( 'json' );
-		res.json({ response });
-	});
+	BaseModel.find({ __t: model })
+		.exec()
+		.then(( response ) => {
+			res.type( 'json' );
+			res.json({ response });
+		});
+};
+
+const getIdFromAPI = ( req, res ) => {
+	BaseModel
+		.findOne({ _id: `${req.params.id}` })
+		.exec()
+		.then(( response ) => {
+			res.type( 'json' );
+			res.json({ response });
+		});
 };
 
 export {
-	getAPI
+	getListAPI,
+	getIdFromAPI
 };

@@ -7,8 +7,8 @@ router.get( '/views/:fileName', ( req, res ) => {
 	res.render( fileName );
 });
 
-require( './imdb' )( router );
 require( './home' )( router );
+require( './imdb' )( router );
 
 router.get( '*', ( req, res ) => res.render( 'layout' ));
 
