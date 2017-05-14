@@ -1,6 +1,4 @@
-extends layout
 block content
-  
   .wrapper(ng-controller="HomeController as home")
     h1(ng-bind="home.title")
 
@@ -15,5 +13,5 @@ block content
         input(type="submit", value="Search")
     
     .latestItem(ng-show="home.imdbData.title !== undefined")
-      imdb-card(data="home.imdbData", save-data="home.saveToDb()")
+      imdb-card(data="home.imdbData", call-action="home.saveToDb()" text-btn="Save")
     

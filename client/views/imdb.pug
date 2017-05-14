@@ -1,0 +1,5 @@
+block content
+	.wrapper(ng-controller="MovieController as movie")
+		div(ng-show="!movie.contentReady") Loading ...
+		div(ng-show="movie.contentReady")
+			imdb-card(ng-repeat="imdb in movie.collection", data="imdb", call-action="movie.saveToDb()" text-btn="Edit")

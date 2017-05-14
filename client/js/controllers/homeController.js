@@ -4,8 +4,8 @@ module.exports = function ( service, broadcaster, $rootScope, $timeout, Notifica
 	$home.imdbText = '';
 	$home.imdbData = {};
 	$home.links = [
-		{ text: 'Movies', url: '/movies' },
-		{ text: 'TvShows', url: '/tvshows' }
+		{ text: 'Movies', url: '/imdb/movie' },
+		{ text: 'TvShows', url: '/imdb/tvshow' }
 	];
 
 	$rootScope.$on( 'item:searched', function ( event, item ) {

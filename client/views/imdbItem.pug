@@ -1,0 +1,10 @@
+.imdb-card
+	h2
+		a(ng-href="{{data.imdburl}}") {{data.title}} - {{data.rating}}
+	img(ng-src="{{data.poster}}", alt="poster {{data.title}}")
+	p(ng-if="data.seasons") Seasons: {{data.seasons}}
+	ul
+		li(ng-repeat="gen in data.genres") {{gen}}
+	ul
+		li(ng-repeat="act in data.actors") {{act}}
+	button(ng-click="callAction()") {{textBtn}}
