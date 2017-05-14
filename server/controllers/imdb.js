@@ -1,42 +1,31 @@
-// Generic getter for movies and tvshows
+// movies router
+
 import { BaseModel } from '../models/BaseSchema';
 
-const getNameModel = ( modelType ) => {
-	let str = '';
+const postImdbId = ( req, res ) => {
+	const postId = req.params.id;
+	const movieRating = req.body.rating;
 
-	if ( modelType === 'tvshow' ) {
-		for ( let i = 0; i <= 2; i += 1 ) {
-			str += modelType.charAt( i ).toUpperCase();
-		}
-		str += modelType.substring( 3 );
-	} else {
-		str = modelType.charAt( 0 ).toUpperCase() + modelType.substring( 1 );
-	}
-	return str;
-};
-
-const getListAPI = ( req, res ) => {
-	const model = getNameModel( req.params.imdb );
-
-	BaseModel.find({ __t: model })
+	BaseModel.findOne({ _id: `${postId}` })
 		.exec()
-		.then(( response ) => {
-			res.type( 'json' );
-			res.json({ response });
+		.then(( movie ) => {
+			movie.setMyRating( movieRating );
+			movie.save()
+				.then(() => res.send( `${movieRating} ${movie.title} rating saved` ));
 		});
 };
 
-const getIdFromAPI = ( req, res ) => {
-	BaseModel
-		.findOne({ _id: `${req.params.id}` })
-		.exec()
-		.then(( response ) => {
-			res.type( 'json' );
-			res.json({ response });
-		});
+const deleteImdbId = ( req, res ) => {
+	const deleteId = req.params.id;
+	const promiseFindOne = BaseModel.findOne({ _id: `${deleteId}` }).exec();
+
+	promiseFindOne.then(( movie ) => {
+		BaseModel.remove({ _id: `${deleteId}` }).exec();
+		res.send( `${movie.title} has been deleted` );
+	});
 };
 
 export {
-	getListAPI,
-	getIdFromAPI
+  postImdbId,
+  deleteImdbId
 };

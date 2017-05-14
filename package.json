@@ -4,7 +4,7 @@
   "description": "imdb application to explain how mean stack works",
   "main": "./bin/www",
   "scripts": {
-    "server-test": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-core/register\" test/server-test",
+    "server-test": "NODE_ENV=test nodemon -e js,pug --exec \"mocha --compilers js:babel-core/register\" test/server-test/",
     "client-test": "karma start",
     "nodemon": "nodemon -e js,pug --exec babel-node  ./bin/www",
     "start": "babel-node  ./bin/www"
