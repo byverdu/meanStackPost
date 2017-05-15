@@ -1,6 +1,7 @@
 /* global angular */
-module.exports = function( service, $routeParams, broadcaster, $rootScope, $timeout ) {
+module.exports = function( service, $routeParams, broadcaster, $rootScope, $timeout, Notification ) {
 	const $imdb = this;
+	$imdb.title = `${$routeParams.collection}s`;
 	$imdb.collection = [];
 	$imdb.contentReady = false;
 	$imdb.singleItem = {};
@@ -18,4 +19,20 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 
 	service.getAPIData( $routeParams.collection )
 		.then( response => broadcaster.itemSearched( response ));
+
+	$imdb.deleteItem = function( index ) {
+		const type = $routeParams.collection;
+		const id = $imdb.collection[ index ]._id;
+		service.deleteItem( type, id )
+			.then(( resp ) => {
+				if ( resp.status === 200 ) {
+					Notification.success( `${resp.data}` );
+					$timeout(() => {
+						$imdb.collection.splice( index, 1 );
+					}, 500 );
+				} else {
+					Notification.error( 'Something went wrong deleting on DB' );
+				}
+			});
+	};
 };

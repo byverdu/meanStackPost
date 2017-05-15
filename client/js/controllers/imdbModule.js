@@ -12,6 +12,7 @@ const dependencies = [
 	'imdbBroadcaster',
 	'$rootScope',
 	'$timeout',
+	'Notification',
 	imdbController
 ];
 

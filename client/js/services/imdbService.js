@@ -29,6 +29,14 @@ module.exports = function ( $http ) {
 				method: 'GET',
 				url: `./api/${type}`
 			});
+		},
+
+		deleteItem( type, id ) {
+			return $http({
+				method: 'DELETE',
+				url: `./imdb/${type}/${id}`,
+				data: id
+			});
 		}
 	};
 };
