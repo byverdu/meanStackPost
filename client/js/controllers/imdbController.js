@@ -1,12 +1,18 @@
+/* global angular */
 module.exports = function( service, $routeParams, broadcaster, $rootScope, $timeout ) {
-	const $movie = this;
-	$movie.collection = [];
-	$movie.contentReady = false;
+	const $imdb = this;
+	$imdb.collection = [];
+	$imdb.contentReady = false;
+	$imdb.singleItem = {};
 
 	$rootScope.$on( 'item:searched', function ( event, item ) {
 		$timeout(() => {
-			$movie.collection = item.data;
-			$movie.contentReady = true;
+			$imdb.collection = item.data;
+			angular.forEach( $imdb.collection, ( value, key ) => {
+				value.itemurl = `/imdb/${$routeParams.collection}/${value._id}`;
+			});
+			$imdb.singleItem = $imdb.collection.find( item => item._id === $routeParams.id );
+			$imdb.contentReady = true;
 		}, 500 );
 	});
 

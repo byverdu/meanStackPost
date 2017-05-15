@@ -2,4 +2,4 @@ block content
 	.wrapper(ng-controller="ImdbController as imdb")
 		div(ng-show="!imdb.contentReady") Loading ...
 		div(ng-show="imdb.contentReady")
-			imdb-card(ng-repeat="imdbItem in imdb.collection", data="imdbItem", call-action="imdb.saveToDb()" text-btn="Edit")
+			imdb-card(data="imdb.singleItem", call-action="imdb.saveToDb()" text-btn="Edit")

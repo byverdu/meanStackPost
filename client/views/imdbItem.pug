@@ -1,8 +1,10 @@
 .imdb-card
 	h2
-		a(ng-href="{{data.imdburl}}") {{data.title}} - {{data.rating}}
+		a(ng-if="data._id", ng-href="{{data.itemurl}}") {{data.title}} - {{data.rating}}
+		a(ng-if="!data._id", ng-href="{{data.imdburl}}") {{data.title}} - {{data.rating}}
 	img(ng-src="{{data.poster}}", alt="poster {{data.title}}")
 	p(ng-if="data.seasons") Seasons: {{data.seasons}}
+	a(ng-if="data._id", ng-href="{{data.imdburl}}") Visit imdb page for {{data.title}}
 	ul
 		li(ng-repeat="gen in data.genres") {{gen}}
 	ul

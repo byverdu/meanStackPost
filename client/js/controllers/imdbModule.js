@@ -2,7 +2,7 @@ import angular from 'angular';
 
 const imdbService = require( '../services/imdbService' );
 const imdbBroadcaster = require( '../services/imdbBroadcaster' );
-const movieController = require( './imdbController' );
+const imdbController = require( './imdbController' );
 
 require( 'angular-ui-notification/dist/angular-ui-notification' );
 
@@ -12,10 +12,10 @@ const dependencies = [
 	'imdbBroadcaster',
 	'$rootScope',
 	'$timeout',
-	movieController
+	imdbController
 ];
 
 angular.module( 'imdbModule', ['ui-notification'])
 	.service( 'imdbService', ['$http', imdbService])
 	.factory( 'imdbBroadcaster', ['$rootScope', imdbBroadcaster])
-	.controller( 'MovieController', dependencies );
+	.controller( 'ImdbController', dependencies );
