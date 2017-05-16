@@ -3,11 +3,11 @@
 
 import { expect } from 'chai';
 import mongoose from 'mongoose';
-import { BaseModel, BaseSchema } from '../server/models/BaseSchema';
-import Movie from '../server/models/MovieSchema';
-import TVShow from '../server/models/ShowSchema';
-import { objectToSave } from '../utils';
-import sampleData from './sampleData';
+import { BaseModel, BaseSchema } from '../../server/models/BaseSchema';
+import Movie from '../../server/models/MovieSchema';
+import TVShow from '../../server/models/ShowSchema';
+import { objectToSave } from '../../utils';
+import sampleData from '../sampleData';
 
 let movie;
 let tvShow;

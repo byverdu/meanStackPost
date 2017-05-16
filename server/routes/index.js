@@ -1,8 +1,9 @@
 import Express from 'express';
 
-const router = Express.Router();
+const router = Express.Router({ mergeParams: true });
+
+require( './api' )( router );
 require( './home' )( router );
-require( './movies' )( router );
-require( './tvshows' )( router );
+require( './imdb' )( router );
 
 module.exports = router;

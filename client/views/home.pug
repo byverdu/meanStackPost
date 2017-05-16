@@ -1,0 +1,17 @@
+block content
+  .wrapper(ng-controller="HomeController as home")
+    h1(ng-bind="home.title")
+
+    nav
+      div(ng-repeat="link in home.links")
+        a(ng-href="{{link.url}}") {{link.text}}
+
+    form.searchImdb(ng-submit="home.callImdbApi()")
+      fieldset
+        label Search on Imdb
+          input(type="text", placeholder="type name film", ng-model="home.imdbText")
+        input(type="submit", value="Search")
+    
+    .latestItem(ng-show="home.imdbData.title !== undefined")
+      imdb-card(data="home.imdbData", call-action="home.saveToDb()" text-btn="Save")
+    

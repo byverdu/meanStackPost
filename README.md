@@ -28,8 +28,8 @@ Para usar esta repo debes de seguir los siguientes pasos:
   - [x] Test Schemas
   - [x] Implementación Schemas
 - [ ] Front End
-  - [ ] Añadir `Gulp & Co`
-  - [ ] Complementar servidor
-  - [ ] Tests para Angular
-  - [ ] Integrar API con Angular
+  - [x] Añadir `Gulp & Co`
+  - [x] Complementar servidor
+  - [x] Tests para Angular 🃏
+  - [x] Integrar API con Angular
   - [ ] 💤 un poco

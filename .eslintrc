@@ -3,7 +3,8 @@
   "plugins": [ "mocha" ],
   "extends": "airbnb",
   "rules": {
-    "indent": [2],
+    "indent": [2, "tab"],
+    "no-tabs": 0,
     "comma-dangle": [2, "never"],
     "react/jsx-indent-props": [2, 4],
     "space-in-parens": [2, "always", { "exceptions": ["()","{}","[]"] } ],
