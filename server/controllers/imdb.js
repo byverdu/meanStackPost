@@ -11,7 +11,12 @@ const postImdbId = ( req, res ) => {
 		.then(( movie ) => {
 			movie.setMyRating( movieRating );
 			movie.save()
-				.then(() => res.send( `${movieRating} ${movie.title} rating saved` ));
+				.then(() => {
+					res.json({
+						text: `${movieRating} rating saved for ${movie.title}`,
+						movie
+					});
+				});
 		});
 };
 

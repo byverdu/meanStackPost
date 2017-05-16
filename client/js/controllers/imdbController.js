@@ -5,6 +5,8 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 	$imdb.collection = [];
 	$imdb.contentReady = false;
 	$imdb.singleItem = {};
+	$imdb.rating = 0;
+	$imdb.revealForm = false;
 
 	$rootScope.$on( 'item:searched', function ( event, item ) {
 		$timeout(() => {
@@ -20,7 +22,7 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 	service.getAPIData( $routeParams.collection )
 		.then( response => broadcaster.itemSearched( response ));
 
-	$imdb.deleteItem = function( index ) {
+	$imdb.deleteItem = function ( index ) {
 		const type = $routeParams.collection;
 		const id = $imdb.collection[ index ]._id;
 		service.deleteItem( type, id )
@@ -30,6 +32,25 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 					$timeout(() => {
 						$imdb.collection.splice( index, 1 );
 					}, 500 );
+				} else {
+					Notification.error( 'Something went wrong deleting on DB' );
+				}
+			});
+	};
+
+	$imdb.showForm = function () {
+		$imdb.revealForm = true;
+	};
+
+	$imdb.postRatingItem = function () {
+		const type = $routeParams.collection;
+		const id = $routeParams.id;
+		service.postRatingItem( type, id, $imdb.rating )
+			.then(( resp ) => {
+				if ( resp.status === 200 ) {
+					Notification.success( `${resp.data.text}` );
+					$imdb.singleItem = resp.data.movie;
+					$imdb.revealForm = false;
 				} else {
 					Notification.error( 'Something went wrong deleting on DB' );
 				}

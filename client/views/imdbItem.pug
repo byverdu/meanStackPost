@@ -2,6 +2,7 @@
 	h2
 		a(ng-if="data._id", ng-href="{{data.itemurl}}") {{data.title}} - {{data.rating}}
 		a(ng-if="!data._id", ng-href="{{data.imdburl}}") {{data.title}} - {{data.rating}}
+	h3(ng-if="data.myRating") My rating: {{data.myRating}}
 	img(ng-src="{{data.poster}}", alt="poster {{data.title}}")
 	p(ng-if="data.seasons") Seasons: {{data.seasons}}
 	a(ng-if="data._id", ng-href="{{data.imdburl}}") Visit imdb page for {{data.title}}

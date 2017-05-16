@@ -37,6 +37,16 @@ module.exports = function ( $http ) {
 				url: `./imdb/${type}/${id}`,
 				data: id
 			});
+		},
+
+		postRatingItem( type, id, rating ) {
+			return $http({
+				method: 'POST',
+				url: `./imdb/${type}/${id}`,
+				data: {
+					rating
+				}
+			});
 		}
 	};
 };
