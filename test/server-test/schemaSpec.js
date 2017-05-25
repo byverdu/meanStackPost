@@ -3,19 +3,26 @@
 
 import { expect } from 'chai';
 import mongoose from 'mongoose';
-import { Imdb } from '../../server/models/ImdbSchema';
+import { ImdbSchema } from '../../server/models/ImdbSchema';
 import { objectToSave } from '../../utils';
 import sampleData from '../sampleData';
 
 let movie;
+let Imdb;
+let connection;
+require( '../../server/db' );
 
 const { sampleMovie, sampleTvshow } = sampleData;
 
-before(() => {
+before(( done ) => {
+	connection = mongoose.createConnection( 'mongodb://localhost/imdbAppTest' );
+	Imdb = connection.model( 'Imdb', ImdbSchema );
 	movie = new Imdb( sampleMovie );
+	connection.once( 'open', () => done());
 });
 
-after(() => {
+after(( done ) => {
+	connection.close(() => done());
 	mongoose.models = {};
 	mongoose.modelSchemas = {};
 });
@@ -55,42 +62,35 @@ describe( 'Schema test cases', () => {
 		it( 'A new movie can be saved to db', () => {
 			const rambo = objectToSave( sampleMovie );
 			const newImdb = new Imdb( rambo );
-			newImdb.save();
-				// Imdb.find().then(( response ) => {
-				// 	expect( response[ response.length - 1 ].title ).to.equal( 'Rambo34' );
-				// 	Imdb.remove({ title: 'Rambo' }).exec();
-				// });
-			// });
-		});
-		xit( 'A saved movie can be deleted from db', () => {
-			setTimeout(() => {
-				const newMovieImdb = new Movie({ title: 'Die Hard' });
-				newMovieImdb.save();
-				BaseModel.remove({ title: 'Die Hard' }).exec();
-				BaseModel.findOne({ title: 'Die Hard' }).then(( response ) => {
-					expect( response ).to.eql( null );
-				});
-			}, 2000 );
-		});
-		xit( 'A new tvShow can be saved to db', () => {
-			const wifeKids = objectToSave( sampleTvshow );
-			const newTvshow = new TVShow( wifeKids );
-			newTvshow.save().then(() => {
-				BaseModel.find({ __t: 'TVShow' }).then(( response ) => {
-					expect( response[ response.length - 1 ].title ).to.equal( 'My Wife and Kids' );
-					BaseModel.remove({ title: 'My Wife and Kids' }).exec();
-				});
+			return newImdb.save().then(( response ) => {
+				expect( response.title ).to.equal( 'Rambo' );
+				Imdb.remove({ title: 'Rambo' }).exec();
 			});
 		});
-		xit( 'A saved tvShow can be deleted from db', () => {
-			setTimeout(() => {
-				const newMovieImdb = new TVShow({ title: 'Silicon Valley' });
-				newMovieImdb.save();
-				BaseModel.remove({ title: 'How I met your mother' }).exec();
-				BaseModel.findOne({ title: 'How I met your mother' }).then(( response ) => {
-					expect( response ).to.eql( null );
+		it( 'A saved movie can be deleted from db', () => {
+			const rambo = new Imdb( sampleMovie );
+			rambo.save()
+				.then(() => {
+					Imdb.remove({ title: 'Rambo' }).exec();
 				});
-			}, 3000 );
+			return Imdb.findOne({ title: 'Rambo' }).then(( response ) => {
+				expect( response ).to.eql( null );
+			});
+		});
+		it( 'More than one item can be added', () => {
+			const rambo = new Imdb( sampleMovie );
+			const castle = new Imdb( sampleTvshow );
+			rambo.save()
+				.then(() => {
+					castle.save()
+						.then(() => {
+							Imdb.find().then(( response ) => {
+								expect( response ).to.have.length( 2 );
+								Imdb.remove({ title: 'Castle' }).exec();
+								Imdb.remove({ title: 'Rambo' }).exec();
+							});
+						});
+				});
 		});
 	});
 });

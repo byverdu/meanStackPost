@@ -16,8 +16,6 @@ const ImdbSchema = new Schema({
 
 ImdbSchema.methods.setMyRating = function ( rating ) { this.myRating = rating; };
 
-const Imdb = mongoose.model( 'Imdb', ImdbSchema );
-
 export {
-	Imdb
+	ImdbSchema
 };
