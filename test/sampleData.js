@@ -20,7 +20,8 @@ const movieDataConverted = {
 	poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTI5Mjg1MzM4NF5BMl5BanBnXkFtZTcwNTAyNzUzMw@@._V1_UX182_CR0,0,182,268_AL_.jpg',
 	rating: '7.1',
 	imdburl: 'https://www.imdb.com/title/tt0462499',
-	genre: ['Action', 'Thriller', 'War']
+	genre: ['Action', 'Thriller', 'War'],
+	type: 'movie'
 };
 
 const sampleTvshow = {
@@ -43,7 +44,8 @@ const tvShowDataConverted = {
 	rating: '8.2',
 	poster: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjM2NjU0ODU0NF5BMl5BanBnXkFtZTgwMDAwMzg5NjE@._V1_UX182_CR0,0,182,268_AL_.jpg',
 	genre: [ 'Comedy', 'Crime', 'Drama' ],
-	imdburl: 'https://www.imdb.com/title/tt1219024' };
+	imdburl: 'https://www.imdb.com/title/tt1219024',
+	type: 'series' };
 
 export default {
 	sampleMovie,

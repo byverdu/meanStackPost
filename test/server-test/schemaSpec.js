@@ -32,6 +32,9 @@ describe( 'Schema test cases', () => {
 		it( 'has a title property that is a String', () => {
 			expect( movie.title ).to.be.a( 'string' );
 		});
+		it( 'has a type property that is a String', () => {
+			expect( movie.type ).to.be.a( 'string' );
+		});
 		it( 'has a poster property that is a String', () => {
 			expect( movie.poster ).to.be.a( 'string' );
 		});
