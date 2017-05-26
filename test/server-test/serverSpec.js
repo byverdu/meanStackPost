@@ -23,7 +23,6 @@ before(( done ) => {
 	movie.save()
 		.then(( imdb ) => {
 			movieId = imdb._id;
-			console.log(movieId)
 			done();
 		});
 	serie.save();
@@ -82,6 +81,44 @@ describe( 'Routing test cases', () => {
 				expect( res.type ).to.include( 'json' );
 				expect( res.body ).to.be.an( 'object' );
 				expect( res.body.title ).to.eql( 'Rambo' );
+				done();
+			});
+		});
+		it( 'a new movie can be add', ( done ) => {
+			request( server )
+			.post( '/api/add' )
+			.send({ data: imdbMovie })
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.type ).to.include( 'json' );
+				expect( res.body ).to.be.an( 'object' );
+				expect( res.body.data ).to.eql( 'Rambo has been saved' );
+				done();
+			});
+		});
+		it( 'a new movie can be updated', ( done ) => {
+			request( server )
+			.put( `/api/update/${movieId}` )
+			.send({ rating: '5.6' })
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.type ).to.include( 'json' );
+				expect( res.body ).to.be.an( 'object' );
+				expect( res.body.data ).to.eql( '5.6 rating for Rambo has been saved' );
+				done();
+			});
+		});
+		it( 'a movie can be deleted', ( done ) => {
+			request( server )
+			.delete( `/api/delete/${movieId}` )
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.type ).to.include( 'json' );
+				expect( res.body ).to.be.an( 'object' );
+				expect( res.body.data ).to.eql( 'Rambo has been deleted' );
 				done();
 			});
 		});
