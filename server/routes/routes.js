@@ -1,7 +1,11 @@
 // home
 import { getImdbData } from '../../utils';
 
-
+const allRoutes = [
+	'/',
+	'/imdb/:collection',
+	'/imdb/:collection/:id'
+];
 
 module.exports = ( router ) => {
 	// route for retrieving Angular partials
@@ -16,7 +20,6 @@ module.exports = ( router ) => {
 			.then( resp => res.json(resp))
 		
 	})
-	router.get( '/', ( req, res ) => res.render( 'layout' ));
-	// router.post( '/', postHome );
+	router.get( allRoutes, ( req, res ) => res.render( 'layout' ));
 	return router;
 };
