@@ -1,75 +1,93 @@
 /* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
 // Test cases for routing
 
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import request from 'supertest';
+import mongoose from 'mongoose';
 
-
-import { BaseModel } from '../../server/models/BaseSchema';
-import Movie from '../../server/models/MovieSchema';
-import TVShow from '../../server/models/ShowSchema';
+import { ImdbSchema } from '../../server/models/ImdbSchema';
 import server from '../../server/';
 import sampleData from '../sampleData';
 
+let movie;
 let movieId;
-let tvshowId;
-let movieId2;
-let tvshowId2;
-const {
-	sampleMovie,
-	sampleTvshow
-} = sampleData;
+let serie;
+let Imdb;
+const { imdbMovie, imdbSerie } = sampleData;
 
-before(() => {
-	const movie = new Movie({ title: 'CasaBlanca' });
-	const tvshow = new TVShow({ title: 'Castle' });
-	const movie2 = new Movie({ title: 'X men' });
-	const tvshow2 = new TVShow({ title: 'Silicon Valley' });
-	movie.save();
-	tvshow.save();
-	movie2.save();
-	tvshow2.save();
-	movieId = movie._id;
-	tvshowId = tvshow._id;
-	movieId2 = movie2._id;
-	tvshowId2 = tvshow2._id;
+before(( done ) => {
+	Imdb = mongoose.model( 'Imdb', ImdbSchema );
+	movie = new Imdb( imdbMovie );
+	serie = new Imdb( imdbSerie );
+
+	movie.save()
+		.then(( imdb ) => {
+			movieId = imdb._id;
+			console.log(movieId)
+			done();
+		});
+	serie.save();
 });
 
 after(() => {
-	BaseModel.remove({ _id: `${movieId}` }).exec();
-	BaseModel.remove({ _id: `${tvshowId}` }).exec();
-	BaseModel.remove({ _id: `${movieId2}` }).exec();
-	BaseModel.remove({ _id: `${tvshowId2}` }).exec();
+	Imdb.remove({ title: 'Rambo' }).exec();
+	Imdb.remove({ title: 'Castle' }).exec();
 });
 
-	describe( 'Routing test cases', () => {
-		describe( 'Root route', () => {
-			it( 'Visiting the root path should return 200', () => {
-				request( server )
-				.get( '/' )
-				.expect( 200 )
-				.then( response => assert( response.text, 'Awesome Imdb' ));
+describe( 'Routing test cases', () => {
+	describe( 'Root route', () => {
+		it( 'Visiting the root path should return 200', ( done ) => {
+			request( server )
+			.get( '/' )
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.text ).to.include( 'Awesome Imdb' );
+				done();
 			});
 		});
+	});
 
-		describe( 'Generic route for movies and tvshows', () => {
-			it( 'imdb route should return 200', () => {
-				request( server )
-				.get( '/api/movie' )
-				.expect( 200 );
-			});
-			it( 'imdb route accepts params', () => {
-				request( server )
-				.get( '/api/movie' )
-				.expect( 200 )
-				.then( response => {
-					console.log(response)
-					expect( response.type ).to.include( 'json' )
-				});
+	describe( 'Api endpoint', () => {
+		it( 'should get all movies', ( done ) => {
+			request( server )
+			.get( '/api/all/movie' )
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.type ).to.include( 'json' );
+				expect( res.body ).to.be.an( 'array' );
+				expect( res.body[ 0 ].type ).to.eql( 'movie' );
+				done();
 			});
 		});
+		it( 'should get all series', ( done ) => {
+			request( server )
+			.get( '/api/all/series' )
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.type ).to.include( 'json' );
+				expect( res.body ).to.be.an( 'array' );
+				expect( res.body[ 0 ].type ).to.eql( 'series' );
+				done();
+			});
+		});
+		it( 'should get an item by id', ( done ) => {
+			request( server )
+			.get( `/api/item/${movieId}` )
+			.expect( 200 )
+			.end(( err, res ) => {
+				if ( err ) done( err );
+				expect( res.type ).to.include( 'json' );
+				expect( res.body ).to.be.an( 'object' );
+				expect( res.body.title ).to.eql( 'Rambo' );
+				done();
+			});
+		});
+	});
 
-	describe( 'Movies route', () => {
+	xdescribe( 'Movies route', () => {
 		it( 'Movies route should return 200', () => {
 			request( server )
 			.get( '/imdb' )
@@ -108,7 +126,7 @@ after(() => {
 		});
 	});
 
-	describe( 'TVShow route', () => {
+	xdescribe( 'TVShow route', () => {
 		it( 'Movies route should return 200', () => {
 			request( server )
 			.get( '/tvshows' )
@@ -146,7 +164,7 @@ after(() => {
 		});
 	});
 
-	describe( 'Post request', () => {
+	xdescribe( 'Post request', () => {
 		it( 'Adding a new movie', () => {
 			request( server )
 			.post( '/' )
@@ -174,7 +192,7 @@ after(() => {
 		});
 	});
 
-	describe( 'Not Found route', () => {
+	xdescribe( 'Not Found route', () => {
 		it( 'Visiting a not known route should return 404', () => {
 			request( server )
 			.get( '/notFound' )
@@ -183,15 +201,15 @@ after(() => {
 		});
 	});
 
-	describe( 'API route', () => {
-		it( 'Fetching data from movie API route', () => {
-			request( server )
-			.get( '/api/movies' )
-			.expect( 'Content-Type', /json/ )
-			.expect( 200 )
-			.end( function ( err, res ) {
-				if ( err ) throw err;
+	xdescribe( 'API route', () => {
+			it( 'Fetching data from movie API route', () => {
+				request( server )
+				.get( '/api/movies' )
+				.expect( 'Content-Type', /json/ )
+				.expect( 200 )
+				.end( function ( err, res ) {
+					if ( err ) throw err;
+				});
 			});
 		});
-	});
 });

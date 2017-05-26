@@ -4,7 +4,6 @@
 import { expect } from 'chai';
 import mongoose from 'mongoose';
 import { ImdbSchema } from '../../server/models/ImdbSchema';
-import { objectToSave } from '../../utils';
 import sampleData from '../sampleData';
 
 let movie;
@@ -12,12 +11,12 @@ let Imdb;
 let connection;
 require( '../../server/db' );
 
-const { sampleMovie, sampleTvshow } = sampleData;
+const { imdbMovie, imdbSerie } = sampleData;
 
 before(( done ) => {
 	connection = mongoose.createConnection( 'mongodb://localhost/imdbAppTest' );
 	Imdb = connection.model( 'Imdb', ImdbSchema );
-	movie = new Imdb( sampleMovie );
+	movie = new Imdb( imdbMovie );
 	connection.once( 'open', () => done());
 });
 
@@ -63,15 +62,14 @@ describe( 'Schema test cases', () => {
 	});
 	describe( 'Saving and deleting documents for Imdb', () => {
 		it( 'A new movie can be saved to db', () => {
-			const rambo = objectToSave( sampleMovie );
-			const newImdb = new Imdb( rambo );
+			const newImdb = new Imdb( imdbMovie );
 			return newImdb.save().then(( response ) => {
 				expect( response.title ).to.equal( 'Rambo' );
 				Imdb.remove({ title: 'Rambo' }).exec();
 			});
 		});
 		it( 'A saved movie can be deleted from db', () => {
-			const rambo = new Imdb( sampleMovie );
+			const rambo = new Imdb( imdbMovie );
 			rambo.save()
 				.then(() => {
 					Imdb.remove({ title: 'Rambo' }).exec();
@@ -81,8 +79,8 @@ describe( 'Schema test cases', () => {
 			});
 		});
 		it( 'More than one item can be added', () => {
-			const rambo = new Imdb( sampleMovie );
-			const castle = new Imdb( sampleTvshow );
+			const rambo = new Imdb( imdbMovie );
+			const castle = new Imdb( imdbSerie );
 			rambo.save()
 				.then(() => {
 					castle.save()
