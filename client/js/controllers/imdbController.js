@@ -23,9 +23,9 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 		.then( response => broadcaster.itemSearched( response ));
 
 	$imdb.deleteItem = function ( index ) {
-		const type = $routeParams.collection;
+		// const type = $routeParams.collection;
 		const id = $imdb.collection[ index ]._id;
-		service.deleteItem( type, id )
+		service.deleteItem( id )
 			.then(( resp ) => {
 				if ( resp.status === 200 ) {
 					Notification.success( `${resp.data}` );
@@ -43,9 +43,9 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 	};
 
 	$imdb.postRatingItem = function () {
-		const type = $routeParams.collection;
+		// const type = $routeParams.collection;
 		const id = $routeParams.id;
-		service.postRatingItem( type, id, $imdb.rating )
+		service.postRatingItem( id, $imdb.rating )
 			.then(( resp ) => {
 				if ( resp.status === 200 ) {
 					Notification.success( `${resp.data.text}` );
