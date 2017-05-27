@@ -2,6 +2,7 @@
 // methods for API
 import mongoose from 'mongoose';
 import { ImdbSchema } from '../models/ImdbSchema';
+import { resolveImdbCall } from '../../utils';
 
 const Imdb = mongoose.model( 'Imdb', ImdbSchema );
 
@@ -57,10 +58,21 @@ const deleteById = ( req, res ) => {
 	});
 };
 
+const searchImdb = ( req, res ) => {
+	const query = {
+		name: req.query.q,
+		type: req.query.t
+	};
+	resolveImdbCall( query )
+		.then( resp => res.json({ data: resp }));
+};
+
+
 export {
 	getAll,
 	getById,
 	addItem,
   updateById,
-  deleteById
+  deleteById,
+	searchImdb
 };

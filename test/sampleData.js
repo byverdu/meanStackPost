@@ -1,4 +1,6 @@
 // Dummy data
+const getIdForName = require( 'name-to-imdb' );
+const imdbApi = require( 'imdb' );
 
 const sampleMovie = {
 	title: 'Rambo',
@@ -35,8 +37,7 @@ const sampleTvshow = {
 	genre: [ 'Comedy', ' Crime', ' Drama' ],
 	director: 'Andrew W. Marlowe',
 	metascore: 'N/A',
-	writer: 'Nathan Fillion',
-	imdburl: 'https://www.imdb.com/title/tt1219024' };
+	writer: 'Nathan Fillion'};
 
 const imdbSerie = {
 	title: 'Castle',
@@ -47,9 +48,25 @@ const imdbSerie = {
 	imdburl: 'https://www.imdb.com/title/tt1219024',
 	type: 'series' };
 
+const getImdbId = query => new Promise(( resolve, reject ) => {
+	getIdForName( query, ( err, data ) => {
+		if ( err ) reject( err );
+		resolve( data );
+	});
+});
+
+const getImdbData = imdbId => new Promise(( resolve, reject ) => {
+	imdbApi( imdbId, ( err, data ) => {
+		if ( err ) reject( err );
+		resolve( data );
+	});
+});
+
 export default {
 	sampleMovie,
 	imdbMovie,
 	sampleTvshow,
-	imdbSerie
+	imdbSerie,
+	getImdbId,
+	getImdbData
 };

@@ -5,16 +5,6 @@ import mongoose from 'mongoose';
 const imdbApi = require( 'imdb' );
 const getIdForName = require( 'name-to-imdb' );
 
-// const splitString = str => str.split( ',' ).map( item => item.trim());
-
-// const toNumber = ( str ) => {
-// 	const isNumber = Number( str );
-// 	if ( isNaN( isNumber )) {
-// 		throw TypeError( 'A string can\'t be converted to Number' );
-// 	}
-// 	return isNumber;
-// };
-
 const objectToSave = ( imdbData, urlId, type ) => {
 	const imdbKeys = Object.keys( imdbData );
 	const props = [
@@ -45,24 +35,36 @@ const DBDisconnect = () => {
 	});
 };
 
-const getImdbData = query => new Promise(( resolve, reject ) => {
-	getIdForName( query, ( errName, resName ) => {
-		if ( resName ) {
-			imdbApi( resName, ( errImdb, data ) => {
-				if ( errImdb ) {
-					reject( errImdb.stack );
-				} else {
-					const tempData = objectToSave( data, resName, query.type );
-					resolve( tempData );
-				}
-			});
-		} else {
-			reject( errName );
-		}
+const getImdbId = query => new Promise(( resolve, reject ) => {
+	getIdForName( query, ( err, data ) => {
+		if ( err ) reject( err );
+		resolve( data );
 	});
+});
+
+const getImdbData = imdbId => new Promise(( resolve, reject ) => {
+	imdbApi( imdbId, ( err, data ) => {
+		if ( err ) reject( err );
+		resolve( data );
+	});
+});
+
+const resolveImdbCall = query => new Promise(( resolve, reject ) => {
+	getImdbId( query )
+		.then(( imdbId ) => {
+			getImdbData( imdbId )
+				.then(( data ) => {
+					if ( data ) {
+						const tempData = objectToSave( data, imdbId, query.type );
+						resolve( tempData );
+					} else {
+						reject( 'promise failed' );
+					}
+				});
+		});
 });
 
 export {
 	DBDisconnect,
-	getImdbData
+	resolveImdbCall
 };
