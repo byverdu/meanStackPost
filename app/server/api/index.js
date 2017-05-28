@@ -2,7 +2,7 @@
 // methods for API
 import mongoose from 'mongoose';
 import { ImdbSchema } from '../models/ImdbSchema';
-import { resolveImdbCall } from '../../utils';
+import { resolveImdbCall } from '../../../utils';
 
 const Imdb = mongoose.model( 'Imdb', ImdbSchema );
 

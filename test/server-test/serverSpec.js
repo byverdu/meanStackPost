@@ -5,8 +5,8 @@ import { expect } from 'chai';
 import request from 'supertest';
 import mongoose from 'mongoose';
 
-import { ImdbSchema } from '../../server/models/ImdbSchema';
-import server from '../../server/';
+import { ImdbSchema } from '../../app/server/models/ImdbSchema';
+import server from '../../app/server/';
 import sampleData from '../sampleData';
 
 let movie;

@@ -3,13 +3,13 @@
 
 import { expect } from 'chai';
 import mongoose from 'mongoose';
-import { ImdbSchema } from '../../server/models/ImdbSchema';
+import { ImdbSchema } from '../../app/server/models/ImdbSchema';
 import sampleData from '../sampleData';
 
 let movie;
 let Imdb;
 let connection;
-require( '../../server/db' );
+require( '../../app/server/db' );
 
 const { imdbMovie, imdbSerie } = sampleData;
 
