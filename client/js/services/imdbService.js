@@ -2,17 +2,14 @@
 
 module.exports = function ( $http ) {
 	return {
-		getImdbData( name ) {
-			const query = {
-				name
-			};
+		getImdbData( name, type ) {
 			return $http({
 				method: 'GET',
-				url: `./search?q=${name}`
+				url: `./api/search?q=${name}&t=${type}`
 			});
 		},
 
-		postHomeData( data ) {
+		addItem( data ) {
 			const isTVShow = 'seasons' in data;
 			const tempData = {
 				data,
@@ -40,7 +37,7 @@ module.exports = function ( $http ) {
 			});
 		},
 
-		postRatingItem( id, rating ) {
+		updateItem( id, rating ) {
 			return $http({
 				method: 'PUT',
 				url: `./api/update/${id}`,
