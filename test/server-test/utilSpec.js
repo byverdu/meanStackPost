@@ -2,31 +2,50 @@
 // Test cases for helper utility
 
 import { expect } from 'chai';
-import { objectToSave } from '../../utils/index';
+import { resolveImdbCall } from '../../utils/index';
 import sampleData from '../sampleData';
 
 const {
-  sampleMovie,
-  movieDataConverted,
-  splitString,
-  sampleTvshow,
-  tvShowDataConverted
+	sampleTvshow,
+	imdbSerie,
+	getImdbId,
+	getImdbData
 } = sampleData;
+const query = {
+	name: 'castle',
+	type: 'series'
+};
 
 describe( 'Util helper methods', () => {
-  it( 'Util.splitString is defined', () => {
-    expect( splitString ).not.equal( undefined );
-  });
-  it( 'Util.splitString returns a split array', () => {
-    expect( splitString( sampleMovie.genres )).to.eql(['Action', 'Adventure', 'Fantasy']);
-  });
-  it( 'Util.objectToSave is defined', () => {
-    expect( objectToSave ).not.equal( undefined );
-  });
-  it( 'Util.objectToSave convert values from API response into mongo docs', () => {
-    expect( objectToSave( sampleMovie )).to.eql( movieDataConverted );
-  });
-  it( 'Util.objectToSave adds seasons prop when is a tvShow', () => {
-    expect( objectToSave( sampleTvshow )).to.eql( tvShowDataConverted );
-  });
+	it( 'Util.getImdbId is defined', () => {
+		expect( getImdbId ).not.equal( undefined );
+	});
+	it( 'Util.getImdbId returns id for an Imdb search', () => {
+		return getImdbId( query )
+			.then(( data ) => {
+				expect( data ).to.eql( 'tt1219024' );
+			});
+	});
+	it( 'Util.getImdbData is defined', () => {
+		expect( getImdbData ).not.equal( undefined );
+	});
+	it( 'Util.getImdbData returns the imdb data', ( done ) => {
+		getImdbData( 'tt1219024' )
+			.then(( imdbData ) => {
+				expect( imdbData ).to.eql( sampleTvshow );
+				done();
+			})
+			.catch( done );
+	}).timeout( 4000 );
+	it( 'Util.resolveImdbCall is defined', () => {
+		expect( resolveImdbCall ).not.equal( undefined );
+	});
+	it( 'Util.resolveImdbCall returns id for an Imdb search', ( done ) => {
+		resolveImdbCall( query )
+			.then(( resp ) => {
+				expect( resp ).to.eql( imdbSerie );
+				done();
+			})
+			.catch( done );
+	}).timeout( 4000 );
 });

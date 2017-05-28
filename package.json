@@ -4,7 +4,7 @@
   "description": "imdb application to explain how mean stack works",
   "main": "./bin/www",
   "scripts": {
-    "server-test": "NODE_ENV=test nodemon -e js,pug --exec \"mocha --compilers js:babel-core/register\" test/server-test/",
+    "server-test": "nodemon -e js,pug --exec \"mocha --compilers js:babel-core/register\" test/server-test/",
     "client-test": "karma start",
     "nodemon": "nodemon -e js,pug --exec babel-node  ./bin/www",
     "start": "babel-node  ./bin/www"
@@ -73,9 +73,10 @@
     "angular-ui-notification": "^0.3.6",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "imdb-api": "^2.2.2",
+    "imdb": "^1.1.0",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.9.4",
+    "name-to-imdb": "^1.6.0",
     "pug": "^2.0.0-beta.12"
   }
 }
