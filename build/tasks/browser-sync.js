@@ -21,7 +21,7 @@ gulp.task( 'browserSync', ['browserify'], () => {
 		exec: 'babel-node  ./app/bin/www',
 		ext: 'pug js',
 		tasks: ['browserify'],
-		ignore: ['./client/static']
+		ignore: ['./app/client/static']
 	})
 		.on( 'start', () => {
 			if ( restarted ) {

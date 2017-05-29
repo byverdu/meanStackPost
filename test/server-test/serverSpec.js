@@ -111,7 +111,7 @@ describe( 'Routing test cases', () => {
 		});
 		it( 'A movie can be searched', ( done ) => {
 			request( server )
-			.get( '/api/search/' )
+			.post( '/api/search/' )
 			.query( 'q=Rambo' )
 			.query( 't=movie' )
 			.expect( 200 )
@@ -119,21 +119,22 @@ describe( 'Routing test cases', () => {
 				if ( err ) done( err );
 				expect( res.type ).to.include( 'json' );
 				expect( res.body ).to.be.an( 'object' );
-				expect( res.body.data ).to.eql( imdbMovie );
+				expect( res.body ).to.eql( imdbMovie );
 				done();
 			});
 		}).timeout( 7000 );
 		it( 'A serie can be searched', ( done ) => {
 			request( server )
-			.get( '/api/search/' )
+			.post( '/api/search/' )
 			.query( 'q=Castle' )
 			.query( 't=series' )
 			.expect( 200 )
 			.end(( err, res ) => {
+				console.log(res)
 				if ( err ) done( err );
 				expect( res.type ).to.include( 'json' );
 				expect( res.body ).to.be.an( 'object' );
-				expect( res.body.data ).to.eql( imdbSerie );
+				expect( res.body ).to.eql( imdbSerie );
 				done();
 			});
 		}).timeout( 7000 );

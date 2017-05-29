@@ -43,7 +43,7 @@ describe( 'imdbService', () => {
 				.when( 'PUT', './api/update/123456789' )
 				.respond( 200, updatedMovie );
 			$httpBackend
-				.when( 'GET', './api/search?q=Rambo&t=movie' )
+				.when( 'POST', './api/search?q=Rambo&t=movie' )
 				.respond( 200, sampleMovie );
 			$httpBackend
 				.when( 'POST', './api/add' )
@@ -104,7 +104,7 @@ describe( 'imdbService', () => {
 		});
 		it( 'should do an http request', () => {
 			$imdbService.getImdbData( 'Rambo', 'movie' );
-			$httpBackend.expectGET( './api/search?q=Rambo&t=movie' );
+			$httpBackend.expectPOST( './api/search?q=Rambo&t=movie' );
 			$httpBackend.flush();
 		});
 		it( 'getImdbData, should search to Imdb', () => {

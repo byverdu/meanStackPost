@@ -18,6 +18,9 @@
 			it( '$scope has a imdbText property', () => {
 				expect( $controller.imdbText ).to.equal( '' );
 			});
+			it( '$scope has a imdbType property set to movie', () => {
+				expect( $controller.imdbType ).to.equal( 'movie' );
+			});
 			it( '$scope has a imdbData property', () => {
 				expect( $controller.imdbData ).to.be.an( 'object' );
 			});

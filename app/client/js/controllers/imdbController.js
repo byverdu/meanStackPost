@@ -1,7 +1,7 @@
 /* global angular */
 module.exports = function( service, $routeParams, broadcaster, $rootScope, $timeout, Notification ) {
 	const $imdb = this;
-	$imdb.title = `${$routeParams.collection}s`;
+	$imdb.title = `${$routeParams.collection}`;
 	$imdb.collection = [];
 	$imdb.contentReady = false;
 	$imdb.singleItem = {};
@@ -42,13 +42,12 @@ module.exports = function( service, $routeParams, broadcaster, $rootScope, $time
 		$imdb.revealForm = true;
 	};
 
-	$imdb.postRatingItem = function () {
-		// const type = $routeParams.collection;
+	$imdb.updateItem = function () {
 		const id = $routeParams.id;
-		service.postRatingItem( id, $imdb.rating )
+		service.updateItem( id, $imdb.rating )
 			.then(( resp ) => {
 				if ( resp.status === 200 ) {
-					Notification.success( `${resp.data.text}` );
+					Notification.success( `${resp.data.data}` );
 					$imdb.singleItem = resp.data.movie;
 					$imdb.revealForm = false;
 				} else {

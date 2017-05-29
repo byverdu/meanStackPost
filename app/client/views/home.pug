@@ -10,8 +10,10 @@ block content
       fieldset
         label Search on Imdb
           input(type="text", placeholder="type name film", ng-model="home.imdbText")
+          input(type="text", placeholder="type of imdb", ng-model="home.imdbType")
         input(type="submit", value="Search")
-    
+    		
+    div(ng-show="home.contentReady") Loading ...
     .latestItem(ng-show="home.imdbData.title !== undefined")
       imdb-card(data="home.imdbData", call-action="home.saveToDb()" text-btn="Save")
     

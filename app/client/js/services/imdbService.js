@@ -4,21 +4,16 @@ module.exports = function ( $http ) {
 	return {
 		getImdbData( name, type ) {
 			return $http({
-				method: 'GET',
+				method: 'POST',
 				url: `./api/search?q=${name}&t=${type}`
 			});
 		},
 
 		addItem( data ) {
-			const isTVShow = 'seasons' in data;
-			const tempData = {
-				data,
-				type: ( isTVShow ) ? 'tvshow' : 'movie'
-			};
 			return $http({
 				method: 'POST',
 				url: './api/add',
-				data: tempData
+				data
 			});
 		},
 
