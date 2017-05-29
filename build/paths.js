@@ -6,6 +6,6 @@ module.exports = {
 	srcServerTest: `${rootTest}/server-test/*Spec.js`,
 	watchTest: [`${rootServer}/**/*.js`, `${rootTest}/**/*Spec.js`],
 	srcClient: `${rootClient}/js/router.js`,
-	destClient: `${rootClient}/app/static/`,
+	destClient: `${rootClient}/static/`,
 	bundleOutput: 'bundle.js'
 };
