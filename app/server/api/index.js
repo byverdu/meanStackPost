@@ -2,7 +2,7 @@
 // methods for API
 import mongoose from 'mongoose';
 import { ImdbSchema } from '../models/ImdbSchema';
-import { resolveImdbCall } from '../../utils';
+import { resolveImdbCall } from '../../../utils';
 
 const Imdb = mongoose.model( 'Imdb', ImdbSchema );
 
@@ -26,8 +26,9 @@ const getById = ( req, res ) => {
 };
 
 const addItem = ( req, res ) => {
-	const newTvshow = new Imdb( req.body.data );
-	newTvshow.save().then( tvShow => res.json({ data: `${tvShow.title} has been saved` }));
+	const newImdb = new Imdb( req.body );	
+	newImdb.save()
+		.then( imdb => res.send( `${imdb.title} has been saved in ${imdb.type}` ));
 };
 
 const updateById = ( req, res ) => {
@@ -54,7 +55,7 @@ const deleteById = ( req, res ) => {
 
 	promiseFindOne.then(( movie ) => {
 		Imdb.remove({ _id: `${deleteId}` }).exec();
-		res.json({ data: `${movie.title} has been deleted` });
+		res.send( `${movie.title} has been deleted` );
 	});
 };
 
@@ -64,7 +65,7 @@ const searchImdb = ( req, res ) => {
 		type: req.query.t
 	};
 	resolveImdbCall( query )
-		.then( resp => res.json({ data: resp }));
+		.then( resp => res.json( resp ));
 };
 
 

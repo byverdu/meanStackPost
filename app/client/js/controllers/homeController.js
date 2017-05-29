@@ -2,11 +2,13 @@ module.exports = function ( service, broadcaster, $rootScope, $timeout, Notifica
 	const $home = this;
 	$home.title = 'Welcome to ImdbApp';
 	$home.imdbText = '';
+	$home.imdbType = 'movie';
 	$home.imdbData = {};
 	$home.links = [
 		{ text: 'Movies', url: '/imdb/movie' },
-		{ text: 'TvShows', url: '/imdb/tvshow' }
+		{ text: 'TvShows', url: '/imdb/series' }
 	];
+	$home.contentReady = false;
 
 	$rootScope.$on( 'item:searched', function ( event, item ) {
 		$timeout(() => {
@@ -14,20 +16,24 @@ module.exports = function ( service, broadcaster, $rootScope, $timeout, Notifica
 				Notification.error( item.message );
 				return;
 			}
-			$home.imdbData = item;
+			$home.imdbData = item.data;
+			$home.contentReady = false;
 		}, 500 );
 	});
 	$home.callImdbApi = function () {
-		service.getImdbData( this.imdbText )
+		$home.contentReady = true;
+		service.getImdbData( this.imdbText, this.imdbType )
 			.then( response => broadcaster.itemSearched( response ));
 		$home.imdbText = '';
+		$home.imdbType = '';
 	};
 
 	$home.saveToDb = function () {
-		service.postHomeData( $home.imdbData )
+		service.addItem( $home.imdbData )
 			.then(( response ) => {
 				if ( response.status === 200 ) {
-					Notification.success( `${response.data} ${response.config.data.type} has been saved to DB` );
+					Notification.success( `${response.data}` );
+					$home.imdbData = null;
 				} else {
 					Notification.error( 'Something went wrong saving on DB' );
 				}

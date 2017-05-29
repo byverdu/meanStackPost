@@ -2,7 +2,7 @@
   "name": "mean-stack-tutorial",
   "version": "1.0.0",
   "description": "imdb application to explain how mean stack works",
-  "main": "./bin/www",
+  "main": "./app/bin/www",
   "scripts": {
     "server-test": "nodemon -e js,pug --exec \"mocha --compilers js:babel-core/register\" test/server-test/",
     "client-test": "karma start",

@@ -3,7 +3,7 @@ block content
 		div(ng-show="!imdb.contentReady") Loading ...
 		div(ng-show="imdb.contentReady")
 			imdb-card(data="imdb.singleItem", call-action="imdb.showForm()" text-btn="Add Rating")
-			form(ng-submit="imdb.postRatingItem()", ng-show="imdb.revealForm")
+			form(ng-submit="imdb.updateItem()", ng-show="imdb.revealForm")
 				h3 Add your Rating
 				input(type="text", ng-model="imdb.rating", placeholder="rating ...")
 				input(type="submit", value="submit")

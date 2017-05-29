@@ -1,4 +1,4 @@
 node_modules
-client/static/bundle.js
-client/static/bundle.js.map
+app/client/static/bundle.js
+app/client/static/bundle.js.map
 npm-debug.log

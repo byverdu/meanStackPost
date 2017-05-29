@@ -2,7 +2,7 @@
 
 import uriUtil from 'mongodb-uri';
 import mongoose from 'mongoose';
-import { dbDevelopment, dbTest } from '../conf';
+import { dbDevelopment, dbTest } from '../../conf';
 
 module.exports = function () {
 	const options = {

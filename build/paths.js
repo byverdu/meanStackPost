@@ -1,5 +1,5 @@
-const rootServer = './server';
-const rootClient = './client';
+const rootServer = './app/server';
+const rootClient = './app/client';
 const rootTest = './test';
 
 module.exports = {
