@@ -6,7 +6,7 @@ const paths = require( '../paths' );
 
 const mochaOpts = {
 	ui: 'tdd',
-	require: ['./server/db'],
+	require: ['./app/server/db'],
 	compilers: 'js:babel-core/register'
 };
 
