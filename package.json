@@ -6,8 +6,8 @@
   "scripts": {
     "server-test": "nodemon -e js,pug --exec \"mocha --compilers js:babel-core/register\" test/server-test/",
     "client-test": "karma start",
-    "nodemon": "nodemon -e js,pug --exec babel-node  ./bin/www",
-    "start": "babel-node  ./bin/www"
+    "nodemon": "nodemon -e js,pug --exec babel-node  ./app/bin/www",
+    "start": "babel-node  ./app/bin/www"
   },
   "repository": {
     "type": "git",
