@@ -16,7 +16,7 @@ Para usar esta repo debes de seguir los siguientes pasos:
 # desarrollar el front-end
 > gulp
 ```
-[Visitar http://localhost:3000](http://localhost:3000)
+[Visitar http://localhost:9000](http://localhost:9000)
 
 ```shell
 # para producción
@@ -24,6 +24,8 @@ Para usar esta repo debes de seguir los siguientes pasos:
 # ver la web
 > npm start
 ```
+
+[Visitar http://localhost:3000](http://localhost:3000)
 
 ### TODO
 
